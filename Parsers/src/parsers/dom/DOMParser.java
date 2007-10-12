@@ -17,7 +17,7 @@ import javax.xml.parsers.SAXParser;
  *
  * @author user
  */
-public class DOMParser extends Parser
+public class DOMParser 
 {
     
     /** Creates a new instance of DOMParser */
