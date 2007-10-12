@@ -13,9 +13,9 @@ package parsers.sax;
  *
  * Clase que no hace nada, destinada a ser heredada y reescrita
  */
-public class SAXHandler implements Servlet
+public class SAXHandler 
 {
-    public void startDocument() {new org.xml.sax.helpers.DefaultHandler().}
+    public void startDocument() {new org.xml.sax.helpers.DefaultHandler();}
         
     public void endDocument() {}
     
