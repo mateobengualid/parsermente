@@ -23,6 +23,11 @@ public class Nodo {
     private String CDATA;
     private Map attributes;
 
+    public Nodo()
+    {
+	hijos = new ArrayList<Nodo>();
+    }    
+    
     public String getName()
     {
 	return name;

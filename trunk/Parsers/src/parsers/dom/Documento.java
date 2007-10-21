@@ -14,6 +14,19 @@ package parsers.dom;
  * @author Mateo
  */
 public class Documento {
-    Nodo raiz;
-    
+    private Nodo raiz;
+
+    public Documento()
+    {
+    }
+
+    public Nodo getRaiz()
+    {
+	return raiz;
+    }
+
+    public void setRaiz(Nodo raiz)
+    {
+	this.raiz = raiz;
+    }
 }
