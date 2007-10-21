@@ -9,6 +9,14 @@
 
 package parsers;
 
+import java.io.File;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.xml.parsers.ParserConfigurationException;
+import org.xml.sax.SAXException;
+import parsers.dom.DOMParser;
+import parsers.dom.Documento;
+
 /**
  *
  * @author Mateo
@@ -19,7 +27,22 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+	try
+	{
+	    File f = new File("algun.xml");
+	    Documento doc = new DOMParser().parse(f);	    
+	    System.out.println("Terminado de parsear");
+	}
+	catch (ParserConfigurationException ex)
+	{
+	    Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+	    ex.printStackTrace();
+	}
+	catch (SAXException ex)
+	{
+	    Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+	    ex.printStackTrace();
+	}
     }
 
 }
