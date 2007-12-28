@@ -7,11 +7,14 @@
 
 package parsers.sax;
 
+
 /**
- * @version 1.00
- * @author Mateo Bengualid
+ *  @version 1.00
+ *   @author Mateo Bengualid
  */
-public class SAXException extends RuntimeException
-{
+// <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
+// #[regen=yes,id=DCE.56CEED61-0A31-E76A-834B-C3E70E14117B]
+// </editor-fold> 
+public class SAXException extends RuntimeException {
     
 }

@@ -13,25 +13,40 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.Stack;
+import java.util.Stack; 
 
 /**
- *
- * @author Mateo
+ *  @author Mateo
  */
-public class StackParser
-{
+// <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
+// #[regen=yes,id=DCE.85A74238-D643-459E-E9E2-4C705A831D40]
+// </editor-fold> 
+public class StackParser {
+
+    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
+    // #[regen=yes,id=DCE.49EB4858-B654-5618-A404-94EFCA405F49]
+    // </editor-fold> 
     protected Stack<Object> stack;
+
+    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
+    // #[regen=yes,id=DCE.C4D88B45-94F9-B77D-84B9-657614E972E9]
+    // </editor-fold> 
     protected StackParserState state;
-    
-    /** Creates a new instance of StackParser */
-    public StackParser()
-    {
+
+    /**
+     *  Creates a new instance of StackParser
+     */
+    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
+    // #[regen=yes,id=DCE.87BF1F70-20C3-B10B-5BCC-95BBEC6E7278]
+    // </editor-fold> 
+    public StackParser () {
 	stack = new Stack<Object>();	
     }
-    
-    public void parse(InputStreamReader sb) throws IOException
-    {
+
+    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
+    // #[regen=yes,id=DCE.9D0E194F-435F-A299-BFF3-7E6332D26CA3]
+    // </editor-fold> 
+    public void parse (InputStreamReader sb) throws java.io.IOException {
 	BufferedReader br = new BufferedReader(sb);
 	char[] c = new char[1];
 	boolean eofReached = false;

@@ -9,11 +9,13 @@
 
 package parsers.sax.automata;
 
+
 /**
- *
- * @author Mateo
+ *  @author Mateo
  */
-public class StackParserException extends RuntimeException
-{
+// <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
+// #[regen=yes,id=DCE.EC4DA7B6-1DBF-EE88-9EC6-89538049E143]
+// </editor-fold> 
+public class StackParserException extends RuntimeException {
 
 }
