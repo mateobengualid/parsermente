@@ -10,46 +10,47 @@
 package parsers.dom;
 
 import java.util.Hashtable; 
+import parsers.sax.Attributes; 
 import java.util.Stack;
 import org.xml.sax.Attributes;
 import org.xml.sax.helpers.DefaultHandler; 
 
 /**
  *  @author Mateo
- *   TODO Reemplazar DefaultHandler por SAXHandler
+ *     TODO Reemplazar DefaultHandler por SAXHandler
  */
 // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-// #[regen=yes,id=DCE.78F3477A-0996-B4B6-F78E-F5251A831471]
+// #[regen=yes,id=DCE.E367C4B2-BAC8-BDBC-0565-0613BE8B7BA8]
 // </editor-fold> 
 public class DOMParserSAXHandler extends DefaultHandler {
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,id=DCE.30A6D56E-5BC9-1FD0-E5F5-6407747585AE]
+    // #[regen=yes,id=DCE.06B6B6CE-3A60-6E3F-0206-6CE632C530BB]
     // </editor-fold> 
-    Documento documento;
-    Stack<Nodo> stack;
+    Document documento;
+    Stack<Node> stack;
 
     /**
      *  Hay que cambiar esta variable por un checkeo por "<![CDATA["
-     *  justo antes, o implementarlo como un evento
+     *        justo antes, o implementarlo como un evento
      */
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,id=DCE.FAFBEE79-A851-3F99-A5B3-757CE9C616B5]
+    // #[regen=yes,id=DCE.222E0403-6E2D-6B0B-E52F-9D3D6B4ED3C9]
     // </editor-fold> 
     boolean procesandoCDATA;
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,id=DCE.7F231A35-1412-058C-F155-5CDAD81240DB]
+    // #[regen=yes,id=DCE.9A3000D8-093C-1A58-CF0C-C1CBC62C13DF]
     // </editor-fold> 
-    public DOMParserSAXHandler (Documento documento) {
+    public DOMParserSAXHandler (Document documento) {
 	this.documento = documento;
-	stack = new Stack<Nodo>();
+	stack = new Stack<Node>();
     }
 
     @Override
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,id=DCE.5BD2E057-F6EC-E993-8BD1-5B6A10DA4D5B]
+    // #[regen=yes,id=DCE.61EB22A9-92CE-568B-B057-212BB4693728]
     // </editor-fold> 
     public void characters (char[] ch, int start, int length) throws parsers.sax.SAXException {
 	String text = String.copyValueOf(ch, start, length).trim();
@@ -66,7 +67,7 @@ public class DOMParserSAXHandler extends DefaultHandler {
     @Override
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,id=DCE.648217F4-0EDC-5375-C615-67C4D6F413B2]
+    // #[regen=yes,id=DCE.C093C020-36FE-DBF9-8132-919A3E7E9C59]
     // </editor-fold> 
     public void endDocument () throws parsers.sax.SAXException {
 	//El unico hijo es la raiz del documento
@@ -76,7 +77,7 @@ public class DOMParserSAXHandler extends DefaultHandler {
     @Override
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,id=DCE.563F9C0C-13FA-FEF4-C19C-1F298C28F3EB]
+    // #[regen=yes,id=DCE.8BA09186-ECAA-C2C9-84F0-8FED0BD0FF0A]
     // </editor-fold> 
     public void endElement (String uri, String localname, String qName) throws parsers.sax.SAXException {
 	stack.pop();
@@ -85,20 +86,20 @@ public class DOMParserSAXHandler extends DefaultHandler {
     @Override
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,id=DCE.74E558C3-CE08-9784-C73A-DD30203645D0]
+    // #[regen=yes,id=DCE.086D0215-D10B-BD20-1D35-B94721EB467D]
     // </editor-fold> 
     public void startDocument () throws parsers.sax.SAXException {
 	//Artilugio para poder trabajar con los nodos
-	stack.push(new Nodo());
+	stack.push(new Node());
     }
 
     @Override
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,id=DCE.600F19C6-55CD-8CDC-3EF0-C6284D73D5E8]
+    // #[regen=yes,id=DCE.50001D73-6000-72DA-1239-4FEC660BB21C]
     // </editor-fold> 
     public void startElement (String uri, String localname, String qName, Attributes attrib) throws parsers.sax.SAXException {
-	Nodo nodo = new Nodo();
+	Node nodo = new Node();
 	Hashtable<String, String> atributos = new Hashtable<String, String>();
 
 	stack.peek().getHijos().add(nodo);
