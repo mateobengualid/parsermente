@@ -9,10 +9,17 @@
 
 package xpath;
 
+
 /**
- *
- * @author Mateo
+ *  @author Mateo
  */
+// <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
+// #[regen=yes,id=DCE.FA685C59-24C2-BCF3-1873-E1DB9B6B6009]
+// </editor-fold> 
 abstract class Axe {
-    public abstract Context evaluate(Context context);    
+
+    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
+    // #[regen=yes,id=DCE.24615F00-9864-AA09-75EE-17F137BF864D]
+    // </editor-fold> 
+    public abstract Context evaluate (Context context);    
 }

@@ -1,12 +1,3 @@
-/*
- * FullExtensionHelper.java
- * 
- * Created on 23-dic-2007, 15:00:03
- * 
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package xpath;
 
 
@@ -14,13 +5,20 @@ package xpath;
  *  @author Mateo
  */
 // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-// #[regen=yes,id=DCE.81E4704A-553C-155A-9A2E-BE1AA23D0CA6]
+// #[regen=yes,id=DCE.D4D89067-2204-2CAF-0C3A-A01980D8F6A0]
 // </editor-fold> 
 public class FullExtensionHelper extends ExpressionHelper {
 
-    @Override
-    public void parseExpression() {
-        throw new UnsupportedOperationException("Not supported yet.");
+    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
+    // #[regen=yes,id=DCE.79CC3E4B-E40B-5DF8-79B9-2C0D9E20FF2F]
+    // </editor-fold> 
+    private StringBuffer str;
+
+    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
+    // #[regen=yes,id=DCE.C859EBFD-3CE0-AE85-79BA-463F5A5DB9D7]
+    // </editor-fold> 
+    public void parseExpression () {
     }
 
 }
+
