@@ -25,17 +25,17 @@ import org.xml.sax.SAXException;
  *  @author user
  */
 // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-// #[regen=yes,id=DCE.3029B64C-E0E8-A1B1-2D12-5C2A6598ED79]
+// #[regen=yes,id=DCE.634C0E9C-1A23-54E5-F34A-20D76A40C71B]
 // </editor-fold> 
 public class DOMParser {
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,id=DCE.AC72F07F-7496-0BF7-D27A-6A612ABB24D7]
+    // #[regen=yes,id=DCE.63068A48-CD21-2EDF-2000-A26B2B73BDB1]
     // </editor-fold> 
-    public Documento parse (File archivo) throws javax.xml.parsers.ParserConfigurationException, parsers.sax.SAXException {
+    public Document parse (File archivo) throws javax.xml.parsers.ParserConfigurationException, parsers.sax.SAXException {
 	try
 	{
-	    Documento doc = new Documento();
+	    Document doc = new Document();
 
 	    SAXParser parser = SAXParserFactory.newInstance().newSAXParser();
 	    parser.parse(archivo, new DOMParserSAXHandler(doc));
