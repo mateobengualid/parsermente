@@ -9,10 +9,13 @@
 
 package xpath;
 
+
 /**
- *
- * @author Mateo
+ *  @author Mateo
  */
-public class Context {
+// <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
+// #[regen=yes,id=DCE.B2F940FF-1A1D-0DDD-7DC7-ACBCEAAB7453]
+// </editor-fold> 
+public abstract class Context extends NodeSetExpression {
 
 }

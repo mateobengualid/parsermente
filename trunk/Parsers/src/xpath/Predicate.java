@@ -2,33 +2,27 @@ package xpath;
 
 
 // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-// #[regen=yes,id=DCE.C2C42061-9C1D-D112-9A93-FE320CBF8F58]
+// #[regen=yes,id=DCE.D8D3E323-85D1-6EE4-75D2-02B1DD4456A2]
 // </editor-fold> 
 public class Predicate {
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,id=DCE.55728A9B-6CEB-7B19-F3BD-A619CEA44E95]
-    // </editor-fold> 
-    private LocationStep mLocationStep;
-
-    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,id=DCE.65C49BA0-A580-A47F-0DF8-9F4FF680E3EE]
+    // #[regen=yes,id=DCE.4CA46F95-92B1-D4FF-077A-1F0FEE89D4ED]
     // </editor-fold> 
     public Predicate () {
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,regenBody=yes,id=DCE.EBD7AB84-C651-3189-9FA2-2C7709276E0E]
+    // #[regen=yes,regenBody=yes,id=DCE.616730A7-ED23-3300-CD5B-DD1AE452B770]
     // </editor-fold> 
     public LocationStep getLocationStep () {
-        return mLocationStep;
+        return null;
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,regenBody=yes,id=DCE.36AA2D01-FFC8-4EEA-8AA4-E37BD279E6CC]
+    // #[regen=yes,regenBody=yes,id=DCE.E507EB1D-7E87-F4B6-A5A0-E175AA4684E9]
     // </editor-fold> 
     public void setLocationStep (LocationStep val) {
-        this.mLocationStep = val;
     }
 
 }
