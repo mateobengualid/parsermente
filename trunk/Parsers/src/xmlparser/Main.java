@@ -14,7 +14,7 @@ package xmlparser;
  *  @author user
  */
 // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-// #[regen=yes,id=DCE.27A68410-B83F-5BD0-B396-6DA7A91582AD]
+// #[regen=yes,id=DCE.BAD77C3D-579D-E47D-6F0C-851BD5E13F1E]
 // </editor-fold> 
 public class Main {
 
@@ -22,7 +22,7 @@ public class Main {
      *  Creates a new instance of Main
      */
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,id=DCE.D35D0073-94DC-E03C-E10A-9F6FCA8B33EE]
+    // #[regen=yes,id=DCE.B1D32252-B09D-AC0B-2BB1-73AD9033A1EF]
     // </editor-fold> 
     public Main () {
 	
@@ -32,7 +32,7 @@ public class Main {
      *  @param args the command line arguments
      */
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,id=DCE.26C91BCB-80A2-103D-A320-4623B5931FA6]
+    // #[regen=yes,id=DCE.B5C04700-082D-BB9D-0317-F8E73CF39CC0]
     // </editor-fold> 
     public static void main (String[] args) {
         

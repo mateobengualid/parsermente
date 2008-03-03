@@ -11,10 +11,10 @@ import parsers.sax.automata.StackParser;
 
 /**
  *  @version 1.00
- *   @author Mateo Bengualid
+ *     @author Mateo Bengualid
  */
 // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-// #[regen=yes,id=DCE.FC6E8D16-9470-9DD9-2F8B-C4CA4F4FAB33]
+// #[regen=yes,id=DCE.C02D107C-50F4-7E0D-7FAD-F90BD670D48E]
 // </editor-fold> 
 public class SAXParser extends StackParser {
 
@@ -22,7 +22,7 @@ public class SAXParser extends StackParser {
      *  Constructor para la clase SAXParser
      */
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,id=DCE.E843C7C2-A74A-D4ED-8355-7E54FBC9F8B0]
+    // #[regen=yes,id=DCE.186EE2F9-C8F6-6CE4-042E-1EB28826E405]
     // </editor-fold> 
     public SAXParser () {
     }

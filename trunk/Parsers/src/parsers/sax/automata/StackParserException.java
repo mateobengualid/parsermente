@@ -14,8 +14,14 @@ package parsers.sax.automata;
  *  @author Mateo
  */
 // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-// #[regen=yes,id=DCE.EC4DA7B6-1DBF-EE88-9EC6-89538049E143]
+// #[regen=yes,id=DCE.A6D943F5-4898-79AE-C59D-A530E65C0819]
 // </editor-fold> 
 public class StackParserException extends RuntimeException {
+
+    public
+    StackParserException(String message)
+    {
+        super(message);
+    }
 
 }

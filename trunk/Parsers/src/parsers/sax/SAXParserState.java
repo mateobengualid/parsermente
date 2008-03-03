@@ -10,10 +10,10 @@ package parsers.sax;
 
 /**
  *  @version 1.00
- *   @author Mateo Bengualid
+ *     @author Mateo Bengualid
  */
 // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-// #[regen=yes,id=DCE.30D0ED8B-15C4-E10A-52BC-10D5F63BB2DE]
+// #[regen=yes,id=DCE.FB8E6B60-9351-F4EA-4482-725373CDD343]
 // </editor-fold> 
 public abstract class SAXParserState {
     

@@ -9,17 +9,44 @@
 
 package parsers.sax;
 
+import java.util.Enumeration;
+import java.util.Hashtable;
+
 
 /**
  *  @author GabrieL
  */
 // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-// #[regen=yes,id=DCE.5883F3D6-DA22-CD78-1ADA-A5A4E38E623F]
+// #[regen=yes,id=DCE.0420E680-D510-3C14-4D00-AEE07BA5EE75]
 // </editor-fold> 
 public class Attributes {
+    private Hashtable<String,String> attributeTable;
 
-    public int getLength() {
+    public
+    Attributes()    
+    {
+        attributeTable = new Hashtable<String, String>();
+    }
+    
+    // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
+    // #[regen=yes,id=DCE.9E94619F-AB26-8F81-D7DD-607A36F13D2C]
+    // </editor-fold> 
+    public int getLength () {
         throw new UnsupportedOperationException("Not yet implemented");
     }
-
+    
+    public void insertAttribute(String name, String value)
+    {
+        attributeTable.put(name, value);
+    }
+    
+    public String getValue(String name)
+    {
+        return attributeTable.get(name);
+    }
+    
+    public Enumeration<String> getAttributes()
+    {
+        return attributeTable.keys();
+    }
 }

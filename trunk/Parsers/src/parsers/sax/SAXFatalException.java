@@ -12,10 +12,10 @@ import com.sun.org.apache.xalan.internal.xsltc.compiler.util.ErrorMessages;
 
 /**
  *  @version 1.00
- *   @author Mateo Bengualid
+ *     @author Mateo Bengualid
  */
 // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-// #[regen=yes,id=DCE.87B7BEE3-8E3E-5618-DD80-16229623313F]
+// #[regen=yes,id=DCE.8B36AACE-C3A0-B372-184B-BA9AEF2D4381]
 // </editor-fold> 
 public class SAXFatalException extends RuntimeException {
     
