@@ -10,32 +10,34 @@ package parsers.sax;
 
 /**
  *  @version 1.00
- *   @author Mateo Bengualid
- *   
- *   Clase que no hace nada, destinada a ser heredada y reescrita
+ *     @author Mateo Bengualid
+ *     
+ *     Clase que no hace nada, destinada a ser heredada y reescrita
  */
 // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-// #[regen=yes,id=DCE.1134493B-BB20-B790-7226-60B9D019AA94]
+// #[regen=yes,id=DCE.1C789B16-EC96-2DCA-DE4E-3D59694EC1BE]
 // </editor-fold> 
 public class SAXHandler {
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,id=DCE.D1E5CB40-F3A3-16F2-A5A7-77CD31C25A53]
+    // #[regen=yes,id=DCE.BCE5469A-4D9E-47D9-0654-3DB4F18E59FA]
     // </editor-fold> 
-    public void startDocument () {new org.xml.sax.helpers.DefaultHandler();}
+    public void startDocument () {}
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,id=DCE.E00FFF9D-2359-43BB-971F-B96F568F1A41]
+    // #[regen=yes,id=DCE.03945475-B64A-2021-05AB-A03B028A27BF]
     // </editor-fold> 
     public void endDocument () {}
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,id=DCE.7D4F1416-C413-2837-34B8-202EA22BB1F6]
+    // #[regen=yes,id=DCE.41585413-022E-2100-6308-0C1FC5D6EC13]
     // </editor-fold> 
-    public void startElement (String uri, String localName, String qName, Attributes atts) {}
+    public void startElement (String name, Attributes atts) {}
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
-    // #[regen=yes,id=DCE.2C1A3ADB-B090-9231-894D-A4CA49497E27]
+    // #[regen=yes,id=DCE.557C3307-4383-C4DE-7A42-BDF92E95B8BE]
     // </editor-fold> 
-    public void endElement (String uri, String localName, String qName) {}    
+    public void endElement (String name) {}   
+    
+    public void characters (String chars) {}
 }
