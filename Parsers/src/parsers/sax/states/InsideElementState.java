@@ -4,7 +4,7 @@
  */
 package parsers.sax.states;
 
-import parsers.sax.StackParserException;
+import parsers.sax.SAXParserException;
 import parsers.sax.*;
 import java.util.Stack;
 import parsers.sax.SAXHandler;
@@ -14,24 +14,24 @@ import parsers.sax.SAXHandler;
  * @author mateo
  * The default state inside an element, when between tags \">FOO<"             >
  */
-public class InsideElementState extends StackParserState
+public class InsideElementState extends SAXParserState
 {
     @Override
-    public StackParserState consumeCharacter(char c, Stack<String> stack, boolean escaped, SAXHandler handler) throws StackParserException
+    public SAXParserState consumeCharacter(char c, Stack<String> stack, boolean escaped, SAXHandler handler) throws SAXParserException
     {
         // Expect to find a comment, text, CDATA, or a new element
         if (c == '<')
         {
-            return new LTElementState();
+            return new LTElementState(this);
         }
-        else if (Character.isLetterOrDigit(c))
+        else if (Character.isLetterOrDigit(c) || (c == ' ') || (c == '\n'))
         {
             // Es un bloque de texto dentro de 
             return new TextElementState(c);
         }
         else
         {
-            throw new StackParserException("Error inside " + stack.pop() + " for " + c);
+            throw new SAXParserException("Error inside " + stack.pop() + " for " + c);
         }
     }
 
@@ -39,5 +39,11 @@ public class InsideElementState extends StackParserState
     public boolean canEscape()
     {
         return true;
+    }
+
+    @Override
+    public boolean canFinalize()
+    {
+        return false;
     }
 }

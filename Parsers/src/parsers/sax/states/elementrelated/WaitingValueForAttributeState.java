@@ -8,13 +8,13 @@ import parsers.sax.states.*;
 import java.util.Stack;
 import parsers.sax.Attributes;
 import parsers.sax.SAXHandler;
-import parsers.sax.StackParserException;
+import parsers.sax.SAXParserException;
 
 /**
  *
  * @author mateo
  */
-public class WaitingValueForAttributeState extends StackParserState
+public class WaitingValueForAttributeState extends SAXParserState
 {
     private String name;
     private String lastAttributeName;
@@ -28,7 +28,7 @@ public class WaitingValueForAttributeState extends StackParserState
     }
 
     @Override
-    public StackParserState consumeCharacter(char c, Stack<String> stack, boolean escaped, SAXHandler handler) throws StackParserException
+    public SAXParserState consumeCharacter(char c, Stack<String> stack, boolean escaped, SAXHandler handler) throws SAXParserException
     {
         if (!escaped)
         {
@@ -44,12 +44,12 @@ public class WaitingValueForAttributeState extends StackParserState
             }
             else
             {
-                throw new StackParserException("Bad attribute format in " + name);
+                throw new SAXParserException("Bad attribute format in " + name);
             }
         }
         else
         {
-            throw new StackParserException("No entities allowed for attribute values");
+            throw new SAXParserException("No entities allowed for attribute values");
         }
     }
 
@@ -58,5 +58,11 @@ public class WaitingValueForAttributeState extends StackParserState
     {
         // No entities allowed as values
         return true;
+    }
+
+    @Override
+    public boolean canFinalize()
+    {
+        return false;
     }
 }

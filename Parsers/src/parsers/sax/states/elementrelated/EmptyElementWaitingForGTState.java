@@ -8,13 +8,13 @@ import parsers.sax.states.*;
 import java.util.Stack;
 import parsers.sax.Attributes;
 import parsers.sax.SAXHandler;
-import parsers.sax.StackParserException;
+import parsers.sax.SAXParserException;
 
 /**
  *
  * @author mateo
  */
-public class EmptyElementWaitingForGTState extends StackParserState
+public class EmptyElementWaitingForGTState extends SAXParserState
 {
     private String name;
     private Attributes attributes;
@@ -26,7 +26,7 @@ public class EmptyElementWaitingForGTState extends StackParserState
     }
 
     @Override
-    public StackParserState consumeCharacter(char c, Stack<String> stack, boolean escaped, SAXHandler handler) throws StackParserException
+    public SAXParserState consumeCharacter(char c, Stack<String> stack, boolean escaped, SAXHandler handler) throws SAXParserException
     {
         if (c == '>')
         {
@@ -36,12 +36,18 @@ public class EmptyElementWaitingForGTState extends StackParserState
         }
         else
         {
-            throw new StackParserException("Bad Format in " + name);
+            throw new SAXParserException("Bad Format in " + name);
         }
     }
 
     @Override
     public boolean canEscape()
+    {
+        return false;
+    }
+
+    @Override
+    public boolean canFinalize()
     {
         return false;
     }

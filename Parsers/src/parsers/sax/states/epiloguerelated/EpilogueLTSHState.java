@@ -2,40 +2,37 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package parsers.sax.states.cdatarelated;
+package parsers.sax.states.epiloguerelated;
 
-import parsers.sax.states.*;
 import java.util.Stack;
 import parsers.sax.SAXHandler;
 import parsers.sax.SAXParserException;
+import parsers.sax.states.SAXParserState;
+import parsers.sax.states.commentrelated.CommentState;
 
 /**
- *
+ * This is about to end. A "&lt;!-" was read.
+ * In case of finding a '-', then it invokes the
+ * comment in commentrelated, since it conserves
+ * the state to return.
  * @author mateo
  */
-public class CDATARBRBState extends SAXParserState
+public class EpilogueLTSHState extends SAXParserState
 {
-    private String CDATA;
-
-    public CDATARBRBState(String CDATA)
+    public EpilogueLTSHState()
     {
-        this.CDATA = CDATA;
     }
 
     @Override
     public SAXParserState consumeCharacter(char c, Stack<String> stack, boolean escaped, SAXHandler handler) throws SAXParserException
     {
-        // Has formed "]]>" and exits the CDATA section
-        if (c == '>')
+        if (c == '-')
         {
-            // Retorna un evento CDATA
-            handler.characters(CDATA,true);
-            return new InsideElementState();
+            return new CommentState(new EpilogueWaitingForEndState());
         }
-        // Has formed only "]]"
         else
         {
-            return new InsideCDATAState(CDATA + "]]" + c);
+            throw new SAXParserException("Bad Format after document finalization");
         }
     }
 

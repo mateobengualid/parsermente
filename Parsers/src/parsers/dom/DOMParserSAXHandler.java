@@ -12,7 +12,6 @@ package parsers.dom;
 import java.util.Hashtable; 
 import parsers.sax.Attributes; 
 import java.util.Stack;
-import org.xml.sax.Attributes;
 import org.xml.sax.helpers.DefaultHandler; 
 
 /**
@@ -52,7 +51,7 @@ public class DOMParserSAXHandler extends DefaultHandler {
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.61EB22A9-92CE-568B-B057-212BB4693728]
     // </editor-fold> 
-    public void characters (char[] ch, int start, int length) throws parsers.sax.SAXException {
+    public void characters (char[] ch, int start, int length) throws parsers.sax.SAXParserException {
 	String text = String.copyValueOf(ch, start, length).trim();
 	if (procesandoCDATA && (!text.isEmpty()))
 	{
@@ -69,7 +68,7 @@ public class DOMParserSAXHandler extends DefaultHandler {
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.C093C020-36FE-DBF9-8132-919A3E7E9C59]
     // </editor-fold> 
-    public void endDocument () throws parsers.sax.SAXException {
+    public void endDocument () throws parsers.sax.SAXParserException {
 	//El unico hijo es la raiz del documento
 	documento.setRaiz(stack.pop().getHijos().get(0));
     }
@@ -79,7 +78,7 @@ public class DOMParserSAXHandler extends DefaultHandler {
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.8BA09186-ECAA-C2C9-84F0-8FED0BD0FF0A]
     // </editor-fold> 
-    public void endElement (String uri, String localname, String qName) throws parsers.sax.SAXException {
+    public void endElement (String uri, String localname, String qName) throws parsers.sax.SAXParserException {
 	stack.pop();
     }
 
@@ -88,17 +87,15 @@ public class DOMParserSAXHandler extends DefaultHandler {
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.086D0215-D10B-BD20-1D35-B94721EB467D]
     // </editor-fold> 
-    public void startDocument () throws parsers.sax.SAXException {
+    public void startDocument () throws parsers.sax.SAXParserException {
 	//Artilugio para poder trabajar con los nodos
 	stack.push(new Node());
     }
 
-    @Override
-
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.50001D73-6000-72DA-1239-4FEC660BB21C]
     // </editor-fold> 
-    public void startElement (String uri, String localname, String qName, Attributes attrib) throws parsers.sax.SAXException {
+    public void startElement (String uri, String localname, String qName, Attributes attrib) throws parsers.sax.SAXParserException {
 	Node nodo = new Node();
 	Hashtable<String, String> atributos = new Hashtable<String, String>();
 
@@ -107,7 +104,7 @@ public class DOMParserSAXHandler extends DefaultHandler {
 	nodo.setName(qName);
 	for (int i = 0; i < attrib.getLength(); i++)
 	{
-            atributos.put(attrib.getQName(i), attrib.getValue(i));
+            //atributos.put(attrib.QName(i), attrib.getValue(i));
 	}
 	nodo.setAttributes(atributos);
 

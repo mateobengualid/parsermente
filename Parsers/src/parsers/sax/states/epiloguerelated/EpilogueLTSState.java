@@ -2,40 +2,33 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package parsers.sax.states.cdatarelated;
+package parsers.sax.states.epiloguerelated;
 
-import parsers.sax.states.*;
 import java.util.Stack;
 import parsers.sax.SAXHandler;
 import parsers.sax.SAXParserException;
+import parsers.sax.states.SAXParserState;
 
 /**
  *
  * @author mateo
  */
-public class CDATARBRBState extends SAXParserState
+public class EpilogueLTSState extends SAXParserState
 {
-    private String CDATA;
-
-    public CDATARBRBState(String CDATA)
+    public EpilogueLTSState()
     {
-        this.CDATA = CDATA;
     }
 
     @Override
     public SAXParserState consumeCharacter(char c, Stack<String> stack, boolean escaped, SAXHandler handler) throws SAXParserException
     {
-        // Has formed "]]>" and exits the CDATA section
-        if (c == '>')
+        if (c == '-')
         {
-            // Retorna un evento CDATA
-            handler.characters(CDATA,true);
-            return new InsideElementState();
+            return new EpilogueLTSHState();
         }
-        // Has formed only "]]"
         else
         {
-            return new InsideCDATAState(CDATA + "]]" + c);
+            throw new SAXParserException("Bad Format after document finalization");
         }
     }
 

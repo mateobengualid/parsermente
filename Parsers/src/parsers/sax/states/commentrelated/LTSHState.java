@@ -2,34 +2,37 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package parsers.sax.states.cdatarelated;
+package parsers.sax.states.commentrelated;
 
-import parsers.sax.SAXHandler;
-import parsers.sax.states.*;
-import java.util.Stack;
 import parsers.sax.SAXParserException;
+import parsers.sax.SAXHandler;
+import java.util.Stack;
+import parsers.sax.states.SAXParserState;
 
 /**
  *
  * @author mateo
+ * State for <!-
  */
-public class LTSLBState extends SAXParserState
+public class LTSHState extends SAXParserState
 {
-    public LTSLBState()
+    private SAXParserState previousState;
+
+    public LTSHState(SAXParserState previousState)
     {
+        this.previousState = previousState;
     }
 
     @Override
     public SAXParserState consumeCharacter(char c, Stack<String> stack, boolean escaped, SAXHandler handler) throws SAXParserException
     {
-        // Should ask for each character consecutively until CDATA[ is spelled
-        if (c == 'C')
+        if (c == '-')
         {
-            return new LTSLBCState();
+            return new CommentState(previousState);
         }
         else
         {
-            throw new SAXParserException("Only \"<![CDATA[\" allowed in a XML file");
+            throw new SAXParserException("Bad Format in a Comment");
         }
     }
 

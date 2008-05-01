@@ -6,14 +6,15 @@ package parsers.sax.states.elementrelated;
 
 import parsers.sax.states.*;
 import java.util.Stack;
+import parsers.sax.Attributes;
 import parsers.sax.SAXHandler;
-import parsers.sax.StackParserException;
+import parsers.sax.SAXParserException;
 
 /**
  *
  * @author mateo
  */
-public class ElementNameState extends StackParserState
+public class ElementNameState extends SAXParserState
 {
     private String name;
 
@@ -23,7 +24,7 @@ public class ElementNameState extends StackParserState
     }
 
     @Override
-    public StackParserState consumeCharacter(char c, Stack<String> stack, boolean escaped, SAXHandler handler) throws StackParserException
+    public SAXParserState consumeCharacter(char c, Stack<String> stack, boolean escaped, SAXHandler handler) throws SAXParserException
     {
         // Si el caracter es escapado, insertarlo en el nombre, sino, procesarlo
         if (escaped)
@@ -44,9 +45,21 @@ public class ElementNameState extends StackParserState
                 name += c;
                 return this;
             }
+            // Si encuentra un '/'
+            else if (c == '/')
+            {
+                return new EmptyElementWaitingForGTState(name, new Attributes());
+            }
+            // Si encuentra un '>'
+            else if (c == '>')
+            {
+                handler.startElement(name, new Attributes());
+                stack.push(name);
+                return new InsideElementState();
+            }
             else
             {
-                throw new StackParserException("Error at name: " + name);
+                throw new SAXParserException("Error at name: " + name);
             }
         }
     }
@@ -55,5 +68,11 @@ public class ElementNameState extends StackParserState
     public boolean canEscape()
     {
         return true;
+    }
+
+    @Override
+    public boolean canFinalize()
+    {
+        return false;
     }
 }

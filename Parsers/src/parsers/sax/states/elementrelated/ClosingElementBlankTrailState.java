@@ -7,13 +7,13 @@ package parsers.sax.states.elementrelated;
 import parsers.sax.states.*;
 import java.util.Stack;
 import parsers.sax.SAXHandler;
-import parsers.sax.StackParserException;
+import parsers.sax.SAXParserException;
 
 /**
  *
  * @author mateo
  */
-public class ClosingElementBlankTrailState extends StackParserState
+public class ClosingElementBlankTrailState extends SAXParserState
 {
     private String elementName;
 
@@ -23,7 +23,7 @@ public class ClosingElementBlankTrailState extends StackParserState
     }
 
     @Override
-    public StackParserState consumeCharacter(char c, Stack<String> stack, boolean escaped, SAXHandler handler) throws StackParserException
+    public SAXParserState consumeCharacter(char c, Stack<String> stack, boolean escaped, SAXHandler handler) throws SAXParserException
     {
         if (c == ' ')
         {
@@ -33,7 +33,7 @@ public class ClosingElementBlankTrailState extends StackParserState
         {
             if (!stack.peek().equals(elementName))
             {
-                throw new StackParserException(stack.pop() + " conflicted with " + elementName);
+                throw new SAXParserException(stack.pop() + " conflicted with " + elementName);
             }
             else
             {
@@ -42,12 +42,18 @@ public class ClosingElementBlankTrailState extends StackParserState
         }
         else
         {
-            throw new StackParserException("Bad Name Format in " + elementName);
+            throw new SAXParserException("Bad Name Format in " + elementName);
         }
     }
 
     @Override
     public boolean canEscape()
+    {
+        return false;
+    }
+
+    @Override
+    public boolean canFinalize()
     {
         return false;
     }

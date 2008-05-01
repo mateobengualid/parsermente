@@ -4,8 +4,7 @@
  */
 package parsers.sax.states;
 
-import parsers.sax.StackParserException;
-import parsers.sax.*;
+import parsers.sax.SAXParserException;
 import java.util.Stack;
 import parsers.sax.SAXHandler;
 
@@ -14,16 +13,17 @@ import parsers.sax.SAXHandler;
  * @author mateo
  * 
  */
-public class TextElementState extends StackParserState
+public class TextElementState extends SAXParserState
 {
     private String text;
 
     public TextElementState(char c)
     {
+        this.text = "" + c;
     }
 
     @Override
-    public StackParserState consumeCharacter(char c, Stack<String> stack, boolean escaped, SAXHandler handler) throws StackParserException
+    public SAXParserState consumeCharacter(char c, Stack<String> stack, boolean escaped, SAXHandler handler) throws SAXParserException
     {
         if (escaped)
         {
@@ -32,19 +32,19 @@ public class TextElementState extends StackParserState
         }
         else
         {
-            if ((c != '&') && (c != '\'') && (c != '\"') && (c != '>'))
+            if (c == '<')            
+            {
+                handler.characters(text,false);
+                return new LTElementState(new InsideElementState());
+            }
+            else if ((c != '&') && (c != '\'') && (c != '\"') && (c != '>'))
             {
                 text += c;
                 return this;
             }
-            else if (c == '<')
-            {
-                handler.characters(text);
-                return new LTElementState();
-            }
             else
             {
-                throw new StackParserException("Bad Format in " + text + c);
+                throw new SAXParserException("Bad Format in " + text + c);
             }
         }
 
@@ -54,5 +54,12 @@ public class TextElementState extends StackParserState
     public boolean canEscape()
     {
         return true;
+    }
+
+    @Override
+    public
+    boolean canFinalize()
+    {
+        return false;
     }
 }
