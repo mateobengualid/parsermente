@@ -1,5 +1,5 @@
 /*
- * StackParser.java
+ * SAXParser.java
  *
  * Created on 11 de agosto de 2007, 16:17
  *
@@ -9,40 +9,35 @@
 package parsers.sax;
 
 import parsers.sax.states.PrologOrRootState;
-import parsers.sax.states.StackParserState;
+import parsers.sax.states.SAXParserState;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.Stack;
-import java.util.jar.Attributes;
-import parsers.sax.SAXHandler;
 
-public class StackParser
+public class SAXParser
 {
     protected Stack<String> stack;
-    protected StackParserState state;
+    protected SAXParserState state;
     protected SAXHandler handler;
     protected Attributes xmlDocumentAttributes;
 
-    public StackParser(SAXHandler handler)
+    public SAXParser(SAXHandler handler)
     {
         stack = new Stack<String>();
         xmlDocumentAttributes = new Attributes();
         state = new PrologOrRootState(xmlDocumentAttributes);
-        this.handler = handler;        
+        this.handler = handler;
     }
 
     public void parse(InputStreamReader sb) throws java.io.IOException
     {
         BufferedReader br = new BufferedReader(sb);
         char[] c = new char[1];
-        boolean eofReached = false;
+        boolean eofReached = (-1 == br.read(c));
 
         while (!eofReached)
         {
             // Here it should analyze and escape characters
-
-            eofReached = (-1 == br.read(c));
-
             // Si debe escapar el caracter
             if (c[0] == '&' && state.canEscape())
             {
@@ -56,12 +51,12 @@ public class StackParser
                 if (threeCharString.equals("lt;"))
                 {
                     c[0] = '<';
-                    state = state.consumeCharacter(c[0], stack, true, null);
+                    state = state.consumeCharacter(c[0], stack, true, handler);
                 }
                 else if (threeCharString.equals("gt;"))
                 {
                     c[0] = '>';
-                    state = state.consumeCharacter(c[0], stack, true, null);
+                    state = state.consumeCharacter(c[0], stack, true, handler);
                 }
                 else if (threeCharString.equals("amp"))
                 {
@@ -73,7 +68,7 @@ public class StackParser
                     if ((br.read(auxCharArray) != -1) && (auxCharArray[0] == ';'))
                     {
                         c[0] = '&';
-                        state = state.consumeCharacter(c[0], stack, true, null);
+                        state = state.consumeCharacter(c[0], stack, true, handler);
                     }
 
                 }
@@ -86,7 +81,7 @@ public class StackParser
                     if ((br.read(auxCharArray) != -1) && (auxCharArray.toString().equals("t;")))
                     {
                         c[0] = '"';
-                        state = state.consumeCharacter(c[0], stack, true, null);
+                        state = state.consumeCharacter(c[0], stack, true, handler);
                     }
 
                 }
@@ -99,12 +94,18 @@ public class StackParser
                     if ((br.read(auxCharArray) != -1) && (auxCharArray.toString().equals("s;")))
                     {
                         c[0] = '\'';
-                        state = state.consumeCharacter(c[0], stack, true, null);
+                        state = state.consumeCharacter(c[0], stack, true, handler);
                     }
 
                 }
             }
-            state = state.consumeCharacter(c[0], stack, false, null);
+            state = state.consumeCharacter(c[0], stack, false, handler);
+            eofReached = (-1 == br.read(c));
+        }
+
+        if (!state.canFinalize())
+        {
+            throw new SAXParserException("The document was bad formatted or incomplete");
         }
     }
 }

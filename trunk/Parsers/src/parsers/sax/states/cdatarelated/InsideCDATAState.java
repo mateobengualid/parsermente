@@ -2,32 +2,30 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package parsers.sax.states.cdatarelated;
 
 import parsers.sax.states.*;
 import java.util.Stack;
 import parsers.sax.SAXHandler;
-import parsers.sax.StackParserException;
+import parsers.sax.SAXParserException;
 
 /**
  *
  * @author mateo
  */
-public class InsideCDATAState extends StackParserState{
-
+public class InsideCDATAState extends SAXParserState
+{
     private String CDATA;
-    
+
     public InsideCDATAState(String CDATA)
     {
         this.CDATA = CDATA;
     }
 
     @Override
-    public
-    StackParserState consumeCharacter(char c, Stack<String> stack, boolean escaped,SAXHandler handler) throws StackParserException
+    public SAXParserState consumeCharacter(char c, Stack<String> stack, boolean escaped, SAXHandler handler) throws SAXParserException
     {
-        if(c!=']')
+        if (c == ']')
         {
             return new CDATARBState(CDATA);
         }
@@ -39,11 +37,14 @@ public class InsideCDATAState extends StackParserState{
     }
 
     @Override
-    public
-    boolean canEscape()
+    public boolean canEscape()
     {
         return false;
     }
-    
 
+    @Override
+    public boolean canFinalize()
+    {
+        return false;
+    }
 }

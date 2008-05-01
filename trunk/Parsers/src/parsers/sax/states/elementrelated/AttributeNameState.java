@@ -13,48 +13,43 @@ import parsers.sax.SAXParserException;
 /**
  *
  * @author mateo
+ * During
  */
-public class WaitingAttributeState extends SAXParserState
+public class AttributeNameState extends SAXParserState
 {
     private String name;
+    private String lastAttributeName;
     private Attributes attributes;
 
-    public WaitingAttributeState(String name)
+    public AttributeNameState(String name, Attributes attributes)
     {
         this.name = name;
-        attributes = new Attributes();
+        this.attributes = attributes;
     }
 
-    public WaitingAttributeState(String name, Attributes attributes)
+    public AttributeNameState(String name, String lastAttributeName, Attributes attributes)
     {
         this.name = name;
+        this.lastAttributeName = lastAttributeName;
         this.attributes = attributes;
     }
 
     @Override
     public SAXParserState consumeCharacter(char c, Stack<String> stack, boolean escaped, SAXHandler handler) throws SAXParserException
     {
-        // Si todavia no llega el nombre o el fin de etiqueta
+        // Si se acabo el nombre al llegar un blanco
         if (c == ' ')
         {
-            return this;
+            return new WaitingEqualForAttributeState(name, lastAttributeName, attributes);
         }
-        // Un elemento vacio
-        else if (c == '/')
+        else if (c == '=')
         {
-            return new EmptyElementWaitingForGTState(name, attributes);
+            return new WaitingValueForAttributeState(name, lastAttributeName, attributes);
         }
-        // El final de la etiqueta
-        else if (c == '>')
-        {
-            handler.startElement(name, attributes);
-            stack.push(name);
-            return new InsideElementState();
-        }
-        // Una cadena de texto que marca el nombre del atributo
         else
         {
-            return new AttributeNameState(name, "" + c, attributes);
+            this.lastAttributeName += c;
+            return this;
         }
     }
 

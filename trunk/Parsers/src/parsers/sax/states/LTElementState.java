@@ -8,7 +8,7 @@ import parsers.sax.states.elementrelated.ElementNameState;
 import parsers.sax.states.elementrelated.ClosingElementState;
 import java.util.Stack;
 import parsers.sax.SAXHandler;
-import parsers.sax.StackParserException;
+import parsers.sax.SAXParserException;
 
 /**
  *
@@ -16,15 +16,24 @@ import parsers.sax.StackParserException;
  * Es ni bien uno abre un &lg; y debe decidirse si es un CDATA,
  * un comentario, o un nuevo elemento
  */
-public class LTElementState extends StackParserState
+public class LTElementState extends SAXParserState
 {
+    // This previous state is in case a comment is introduced, and
+    // it has to remember the previous state
+    private SAXParserState previousState;
+
+    public LTElementState(SAXParserState previousState)
+    {
+        this.previousState = previousState;
+    }
+
     @Override
-    public StackParserState consumeCharacter(char c, Stack<String> stack, boolean escaped, SAXHandler handler) throws StackParserException
+    public SAXParserState consumeCharacter(char c, Stack<String> stack, boolean escaped, SAXHandler handler) throws SAXParserException
     {
         // Es por comentario o un <![CDATA[]]>
         if (c == '!')
         {
-            return new LTSState();
+            return new LTSState(previousState);
         }
         // Es por cierre de elemento
         else if (c == '/')
@@ -42,5 +51,11 @@ public class LTElementState extends StackParserState
     public boolean canEscape()
     {
         return true;
+    }
+
+    @Override
+    public boolean canFinalize()
+    {
+        return false;
     }
 }

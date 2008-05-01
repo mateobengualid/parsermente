@@ -4,22 +4,20 @@
  */
 package parsers.sax.states;
 
-import parsers.sax.states.commentrelated.LTSHState;
-import parsers.sax.states.cdatarelated.LTSLBState;
 import java.util.Stack;
 import parsers.sax.SAXHandler;
 import parsers.sax.SAXParserException;
+import parsers.sax.states.commentrelated.LTSHState;
 
 /**
  *
  * @author mateo
- * State for <!
  */
-public class LTSState extends SAXParserState
+public class FirstTagLTSState extends SAXParserState
 {
     private SAXParserState previousState;
 
-    public LTSState(SAXParserState previousState)
+    public FirstTagLTSState(SAXParserState previousState)
     {
         this.previousState = previousState;
     }
@@ -27,19 +25,25 @@ public class LTSState extends SAXParserState
     @Override
     public SAXParserState consumeCharacter(char c, Stack<String> stack, boolean escaped, SAXHandler handler) throws SAXParserException
     {
-        // Es por un <!- de comentario
+        // Is a <!E for <!ENTITY[]>
+        //if (c == '?')
+        //{
+        //    return new PrologNameState("",xmlDocumentAttributes);
+        //} else 
+        // Is a comment
         if (c == '-')
         {
+            // TODO Agregar acá la consideración de que podría ser un ENTITY
             return new LTSHState(previousState);
         }
-        // Es por un <![ de un CDATA
-        else if (c == '[')
-        {
-            return new LTSLBState();
-        }
+        // Is the root element
         else
         {
-            throw new SAXParserException("For compatibility reasons, don't use <! as part of a name");
+            // Here will check for prolog attributes, for well-formedness, and
+            // finally transfer control to 
+
+
+            throw new SAXParserException("Bad Format for a comment");
         }
     }
 

@@ -2,40 +2,38 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package parsers.sax.states.cdatarelated;
+package parsers.sax.states.commentrelated;
 
 import parsers.sax.states.*;
-import java.util.Stack;
-import parsers.sax.SAXHandler;
 import parsers.sax.SAXParserException;
+import parsers.sax.SAXHandler;
+import parsers.sax.*;
+import java.util.Stack;
 
 /**
  *
  * @author mateo
  */
-public class CDATARBRBState extends SAXParserState
+public class CommentHHExpectingGTState extends SAXParserState
 {
-    private String CDATA;
+    private SAXParserState previousState;
 
-    public CDATARBRBState(String CDATA)
+    public CommentHHExpectingGTState(SAXParserState previousState)
     {
-        this.CDATA = CDATA;
+        this.previousState = previousState;
     }
 
     @Override
     public SAXParserState consumeCharacter(char c, Stack<String> stack, boolean escaped, SAXHandler handler) throws SAXParserException
     {
-        // Has formed "]]>" and exits the CDATA section
-        if (c == '>')
+        // No puede ser otra mas que "-" o "-->"
+        if (c != '>')
         {
-            // Retorna un evento CDATA
-            handler.characters(CDATA,true);
-            return new InsideElementState();
+            throw new SAXParserException("Two hyphens must be followed by a > inside a comment");
         }
-        // Has formed only "]]"
         else
         {
-            return new InsideCDATAState(CDATA + "]]" + c);
+            return previousState;
         }
     }
 

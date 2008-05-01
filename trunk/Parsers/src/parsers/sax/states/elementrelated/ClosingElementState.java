@@ -4,16 +4,18 @@
  */
 package parsers.sax.states.elementrelated;
 
+import parsers.sax.states.epiloguerelated.EpilogueWaitingForEndState;
+import java.util.EmptyStackException;
 import parsers.sax.states.*;
 import java.util.Stack;
 import parsers.sax.SAXHandler;
-import parsers.sax.StackParserException;
+import parsers.sax.SAXParserException;
 
 /**
  *
  * @author mateo
  */
-public class ClosingElementState extends StackParserState
+public class ClosingElementState extends SAXParserState
 {
     private String elementName;
 
@@ -23,17 +25,32 @@ public class ClosingElementState extends StackParserState
     }
 
     @Override
-    public StackParserState consumeCharacter(char c, Stack<String> stack, boolean escaped, SAXHandler handler) throws StackParserException
+    public SAXParserState consumeCharacter(char c, Stack<String> stack, boolean escaped, SAXHandler handler) throws SAXParserException
     {
         if (c == '>')
         {
-            if (!stack.peek().equals(elementName))
+            try
             {
-                throw new StackParserException(stack.pop() + " conflicted with " + elementName);
+                if (!stack.peek().equals(elementName))
+                {
+                    throw new SAXParserException(stack.pop() + " conflicted with " + elementName);
+                }
+                else
+                {
+                    handler.endElement(stack.pop());
+                    if (!stack.empty())
+                    {
+                        return new InsideElementState();
+                    }
+                    else
+                    {
+                        return new EpilogueWaitingForEndState();
+                    }
+                }
             }
-            else
+            catch (EmptyStackException e)
             {
-                return new InsideElementState();
+                throw new SAXParserException("More than one root element");
             }
         }
         else if (c == ' ')
@@ -51,5 +68,11 @@ public class ClosingElementState extends StackParserState
     public boolean canEscape()
     {
         return true;
+    }
+
+    @Override
+    public boolean canFinalize()
+    {
+        return false;
     }
 }

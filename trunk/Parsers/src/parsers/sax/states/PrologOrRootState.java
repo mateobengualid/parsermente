@@ -6,43 +6,52 @@ package parsers.sax.states;
 
 import parsers.sax.*;
 import java.util.Stack;
-import java.util.jar.Attributes;
 import parsers.sax.SAXHandler;
 
 /**
  *
  * @author mateo
  */
-public class PrologOrRootState extends StackParserState
+public class PrologOrRootState extends SAXParserState
 {
     // This is the same object that the StackParser has,
     // linked this way is the safest possibility
     Attributes xmlDocumentAttributes;
-    
+
     public PrologOrRootState(Attributes xmlDocumentAttributes)
     {
         this.xmlDocumentAttributes = xmlDocumentAttributes;
     }
-    
+
     @Override
-    public StackParserState consumeCharacter(char c, Stack<String> stack, boolean escaped, SAXHandler handler) throws StackParserException
+    public SAXParserState consumeCharacter(char c, Stack<String> stack, boolean escaped, SAXHandler handler) throws SAXParserException
     {
         if (c == ' ')
         {
             return this;
         }
-        if (c == '<')
+        else if (c == '<')
         {
             return new FirstTagLTState(xmlDocumentAttributes);
         }
+        else if (c == '\n')
+        {
+            return this;
+        }
         else
         {
-            throw new StackParserException("Bad Format");
+            throw new SAXParserException("Bad Format");
         }
     }
 
     @Override
     public boolean canEscape()
+    {
+        return false;
+    }
+
+    @Override
+    public boolean canFinalize()
     {
         return false;
     }

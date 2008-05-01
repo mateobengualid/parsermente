@@ -2,40 +2,38 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package parsers.sax.states.cdatarelated;
+package parsers.sax.states.commentrelated;
 
 import parsers.sax.states.*;
+import parsers.sax.SAXParserException;
+import parsers.sax.*;
 import java.util.Stack;
 import parsers.sax.SAXHandler;
-import parsers.sax.SAXParserException;
 
 /**
  *
  * @author mateo
+ * Inside a comment
  */
-public class CDATARBRBState extends SAXParserState
+public class CommentState extends SAXParserState
 {
-    private String CDATA;
+    private SAXParserState previousState;
 
-    public CDATARBRBState(String CDATA)
+    public CommentState(SAXParserState previousState)
     {
-        this.CDATA = CDATA;
+        this.previousState = previousState;
     }
 
     @Override
     public SAXParserState consumeCharacter(char c, Stack<String> stack, boolean escaped, SAXHandler handler) throws SAXParserException
     {
-        // Has formed "]]>" and exits the CDATA section
-        if (c == '>')
+        if (c == '-')
         {
-            // Retorna un evento CDATA
-            handler.characters(CDATA,true);
-            return new InsideElementState();
+            return new CommentHState(previousState);
         }
-        // Has formed only "]]"
         else
         {
-            return new InsideCDATAState(CDATA + "]]" + c);
+            return this;
         }
     }
 
