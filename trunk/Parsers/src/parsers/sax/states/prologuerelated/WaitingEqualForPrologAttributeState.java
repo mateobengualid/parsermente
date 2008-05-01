@@ -2,19 +2,19 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package parsers.sax.states.prologrelated;
+package parsers.sax.states.prologuerelated;
 
-import parsers.sax.states.*;
 import java.util.Stack;
 import parsers.sax.Attributes;
 import parsers.sax.SAXHandler;
-import parsers.sax.StackParserException;
+import parsers.sax.SAXParserException;
+import parsers.sax.states.SAXParserState;
 
 /**
  *
  * @author mateo
  */
-public class WaitingEqualForPrologAttributeState extends StackParserState
+public class WaitingEqualForPrologAttributeState extends SAXParserState
 {
     private String name;
     private String lastAttributeName;
@@ -28,7 +28,7 @@ public class WaitingEqualForPrologAttributeState extends StackParserState
     }
 
     @Override
-    public StackParserState consumeCharacter(char c, Stack<String> stack, boolean escaped, SAXHandler handler) throws StackParserException
+    public SAXParserState consumeCharacter(char c, Stack<String> stack, boolean escaped, SAXHandler handler) throws SAXParserException
     {
         if (c == ' ')
         {
@@ -40,12 +40,18 @@ public class WaitingEqualForPrologAttributeState extends StackParserState
         }
         else
         {
-            throw new StackParserException("Bad attribute in " + name);
+            throw new SAXParserException("Bad attribute in " + name);
         }
     }
 
     @Override
     public boolean canEscape()
+    {
+        return false;
+    }
+
+    @Override
+    public boolean canFinalize()
     {
         return false;
     }

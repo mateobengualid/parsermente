@@ -2,23 +2,24 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package parsers.sax.states.prologrelated;
+package parsers.sax.states.prologuerelated;
 
 import parsers.sax.Attributes;
 import parsers.sax.states.*;
 import java.util.Stack;
 import parsers.sax.SAXHandler;
 import parsers.sax.states.PrologOrRootState;
-import parsers.sax.StackParserException;
-import parsers.sax.states.StackParserState;
+import parsers.sax.SAXParserException;
+import parsers.sax.states.SAXParserState;
 
 /**
  *
  * @author mateo
  */
-public class ClosingPrologDeclarationState extends StackParserState
+public class ClosingPrologDeclarationState extends SAXParserState
 {
     private String elementName;
+    private Attributes attributes;
 
     public ClosingPrologDeclarationState()
     {
@@ -27,11 +28,12 @@ public class ClosingPrologDeclarationState extends StackParserState
 
     ClosingPrologDeclarationState(String name, Attributes attributes)
     {
-        throw new UnsupportedOperationException("Not yet implemented");
+        this.elementName = name;
+        this.attributes = attributes;
     }
 
     @Override
-    public StackParserState consumeCharacter(char c, Stack<String> stack, boolean escaped, SAXHandler handler) throws StackParserException
+    public SAXParserState consumeCharacter(char c, Stack<String> stack, boolean escaped, SAXHandler handler) throws SAXParserException
     {
         if (c == '>')
         {
@@ -41,7 +43,7 @@ public class ClosingPrologDeclarationState extends StackParserState
         }
         else
         {
-            throw new StackParserException("A declaration is composed of <?xml foo='bar' ?>");
+            throw new SAXParserException("A declaration is composed of <?xml foo='bar' ?>");
         }
     }
 
@@ -49,5 +51,11 @@ public class ClosingPrologDeclarationState extends StackParserState
     public boolean canEscape()
     {
         return true;
+    }
+
+    @Override
+    public boolean canFinalize()
+    {
+        return false;
     }
 }
