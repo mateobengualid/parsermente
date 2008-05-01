@@ -2,28 +2,31 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package parsers.sax.states.prologrelated;
+package parsers.sax.states.prologuerelated;
 
-import parsers.sax.states.*;
 import java.util.Stack;
+import parsers.sax.Attributes;
 import parsers.sax.SAXHandler;
-import parsers.sax.StackParserException;
+import parsers.sax.SAXParserException;
+import parsers.sax.states.SAXParserState;
 
 /**
  *
  * @author mateo
  */
-public class PrologNameState extends StackParserState
+public class PrologNameState extends SAXParserState
 {
     private String name;
+    private Attributes attributes;
 
-    public PrologNameState(String name)
+    public PrologNameState(String name, Attributes attributes)
     {
         this.name = name;
+        this.attributes = attributes;
     }
 
     @Override
-    public StackParserState consumeCharacter(char c, Stack<String> stack, boolean escaped, SAXHandler handler) throws StackParserException
+    public SAXParserState consumeCharacter(char c, Stack<String> stack, boolean escaped, SAXHandler handler) throws SAXParserException
     {
         // Si el caracter es escapado, insertarlo en el nombre, sino, procesarlo
         if (escaped)
@@ -42,7 +45,7 @@ public class PrologNameState extends StackParserState
                 }
                 else
                 {
-                    throw new StackParserException("A declaration is composed of <?xml foobar ?>");
+                    throw new SAXParserException("A declaration is composed of <?xml foobar ?>");
                 }
             }
             // TODO Crear una funcion que incorpore el dominio para nombres
@@ -53,7 +56,7 @@ public class PrologNameState extends StackParserState
             }
             else
             {
-                throw new StackParserException("Error at name: " + name);
+                throw new SAXParserException("Error at name: " + name);
             }
         }
     }
@@ -62,5 +65,11 @@ public class PrologNameState extends StackParserState
     public boolean canEscape()
     {
         return true;
+    }
+
+    @Override
+    public boolean canFinalize()
+    {
+        return false;
     }
 }

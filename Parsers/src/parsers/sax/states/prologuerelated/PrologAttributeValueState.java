@@ -2,19 +2,19 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package parsers.sax.states.prologrelated;
+package parsers.sax.states.prologuerelated;
 
 import parsers.sax.states.*;
 import java.util.Stack;
 import parsers.sax.Attributes;
 import parsers.sax.SAXHandler;
-import parsers.sax.StackParserException;
+import parsers.sax.SAXParserException;
 
 /**
  *
  * @author mateo
  */
-public class PrologAttributeValueState extends StackParserState
+public class PrologAttributeValueState extends SAXParserState
 {
     private String name;
     private String lastAttributeName;
@@ -32,11 +32,11 @@ public class PrologAttributeValueState extends StackParserState
     }
 
     @Override
-    public StackParserState consumeCharacter(char c, Stack<String> stack, boolean escaped, SAXHandler handler) throws StackParserException
+    public SAXParserState consumeCharacter(char c, Stack<String> stack, boolean escaped, SAXHandler handler) throws SAXParserException
     {
         if (c == '<')
         {
-            throw new StackParserException("'<' can't be inside the value of an attribute");
+            throw new SAXParserException("'<' can't be inside the value of an attribute");
         }
         else if (c == enclosingChar)
         {
@@ -54,5 +54,11 @@ public class PrologAttributeValueState extends StackParserState
     public boolean canEscape()
     {
         return true;
+    }
+
+    @Override
+    public boolean canFinalize()
+    {
+        return false;
     }
 }

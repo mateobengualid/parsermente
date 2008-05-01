@@ -2,20 +2,19 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package parsers.sax.states.prologrelated;
+package parsers.sax.states.prologuerelated;
 
-import parsers.sax.states.*;
-import parsers.sax.states.elementrelated.PrologAttributeNameState;
 import java.util.Stack;
 import parsers.sax.Attributes;
 import parsers.sax.SAXHandler;
-import parsers.sax.StackParserException;
+import parsers.sax.SAXParserException;
+import parsers.sax.states.SAXParserState;
 
 /**
  *
  * @author mateo
  */
-public class WaitingPrologAttributeState extends StackParserState
+public class WaitingPrologAttributeState extends SAXParserState
 {
     private String name;
     private Attributes attributes;
@@ -33,7 +32,7 @@ public class WaitingPrologAttributeState extends StackParserState
     }
 
     @Override
-    public StackParserState consumeCharacter(char c, Stack<String> stack, boolean escaped, SAXHandler handler) throws StackParserException
+    public SAXParserState consumeCharacter(char c, Stack<String> stack, boolean escaped, SAXHandler handler) throws SAXParserException
     {
         // Si todavia no llega el nombre o el fin de etiqueta
         if (c == ' ')
@@ -43,22 +42,22 @@ public class WaitingPrologAttributeState extends StackParserState
         // Una barra invertida no tiene cabida dentro del prologo
         else if (c == '/')
         {
-            throw new StackParserException("No '/' allowed inside a declaration");
+            throw new SAXParserException("No '/' allowed inside a declaration");
         }
         // El final llega incorrectamente
         else if (c == '>')
         {
-            throw new StackParserException("A declaration is composed of <?xml foo='bar' ?>");
+            throw new SAXParserException("A declaration is composed of <?xml foo='bar' ?>");
         }
         // Llegado al final de la declaracion        
         else if (c == '?')
         {
-            return new ClosingPrologDeclarationState(name,attributes);
-        }            
+            return new ClosingPrologDeclarationState(name, attributes);
+        }
         // Una cadena de texto que marca el nombre del atributo
         else
         {
-            return new PrologAttributeNameState("" + c);
+            return new PrologAttributeNameState("" + c, attributes);
         }
     }
 
@@ -66,5 +65,11 @@ public class WaitingPrologAttributeState extends StackParserState
     public boolean canEscape()
     {
         return true;
+    }
+
+    @Override
+    public boolean canFinalize()
+    {
+        return false;
     }
 }
