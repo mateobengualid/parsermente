@@ -2,7 +2,7 @@ package xpath;
 
 
 /**
- *  @author Mateo
+ *  @author Mateo Bengualid
  */
 // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
 // #[regen=yes,id=DCE.D4D89067-2204-2CAF-0C3A-A01980D8F6A0]
