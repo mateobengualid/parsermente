@@ -7,34 +7,50 @@ import dtdparser.*;
  */
 public class WaitingForCategoryOrContentState extends DTDState
 {
-public WaitingForCategoryOrContentState(DTDState previousState, char c)
-{
-//TODO: Llenar con algo si hace falta, o borrar.
-}
+    private String elementName;
+    
+    public String getElementName()
+    {
+        return elementName;
+    }
 
-@Override
-public DTDState consumeCharacter(char c)
-{
-if(c == ' ')
-{
-return this;
-}
-else if(c == '\n')
-{
-return this;
-}
-else if(c == '(')
-{
-return new ReadingContentState(this, c);
-}
-else if(c == 'A')
-{
-return new ReadingCategoryAState(this, c);
-}
-else if(c == 'E')
-{
-return new ReadingCategoryEState(this, c);
-}
-else { throw new RuntimeException("Unexpected symbol.");}
-}
+    public void setElementName(String elementName)
+    {
+        this.elementName = elementName;
+    }
+
+    public WaitingForCategoryOrContentState(DTDState previousState, char c)
+    {
+        // Proviene de leer el nombre del elemento, así que extraerlo.
+        elementName = ((ReadingElementNameState) previousState).getElementName();
+    }
+
+    @Override
+    public DTDState consumeCharacter(char c)
+    {
+        if (c == ' ')
+        {
+            return this;
+        }
+        else if (c == '\n')
+        {
+            return this;
+        }
+        else if (c == '(')
+        {
+            return new ReadingContentState(this, c);
+        }
+        else if (c == 'A')
+        {
+            return new ReadingCategoryAState(this, c);
+        }
+        else if (c == 'E')
+        {
+            return new ReadingCategoryEState(this, c);
+        }
+        else
+        {
+            throw new RuntimeException("Unexpected symbol.");
+        }
+    }
 }

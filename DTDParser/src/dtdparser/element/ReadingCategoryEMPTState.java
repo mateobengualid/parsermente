@@ -7,18 +7,33 @@ import dtdparser.*;
  */
 public class ReadingCategoryEMPTState extends DTDState
 {
-public ReadingCategoryEMPTState(DTDState previousState, char c)
-{
-//TODO: Llenar con algo si hace falta, o borrar.
-}
+    private String elementName;
 
-@Override
-public DTDState consumeCharacter(char c)
-{
-if(c == 'Y')
-{
-return new ReadingCategoryEMPTYState(this, c);
-}
-else { throw new RuntimeException("Unexpected symbol.");}
-}
+    public String getElementName()
+    {
+        return elementName;
+    }
+
+    public void setElementName(String elementName)
+    {
+        this.elementName = elementName;
+    }
+
+    public ReadingCategoryEMPTState(DTDState previousState, char c)
+    {
+        elementName = ((ReadingCategoryEMPState) previousState).getElementName();
+    }
+
+    @Override
+    public DTDState consumeCharacter(char c)
+    {
+        if (c == 'Y')
+        {
+            return new ReadingCategoryEMPTYState(this, c);
+        }
+        else
+        {
+            throw new RuntimeException("Unexpected symbol.");
+        }
+    }
 }

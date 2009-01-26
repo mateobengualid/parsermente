@@ -8,22 +8,37 @@ import dtdparser.start.BeginningSpaceTrailState;
  */
 public class ReadingContentState extends DTDState
 {
-public ReadingContentState(DTDState previousState, char c)
-{
-//TODO: Llenar con algo si hace falta, o borrar.
-}
+    private String elementName;
 
-@Override
-public DTDState consumeCharacter(char c)
-{
-if(c == '>')
-{
-this.addContentToChecklist(c);
-return new BeginningSpaceTrailState(this, c);
-}
-else this.readAnotherContentChar(c);
-return this;
-}
+    public String getElementName()
+    {
+        return elementName;
+    }
+
+    public void setElementName(String elementName)
+    {
+        this.elementName = elementName;
+    }
+
+    public ReadingContentState(DTDState previousState, char c)
+    {
+        elementName = ((WaitingForCategoryOrContentState) previousState).getElementName();
+    }
+
+    @Override
+    public DTDState consumeCharacter(char c)
+    {
+        if (c == '>')
+        {
+            this.addContentToChecklist(c);
+            return new BeginningSpaceTrailState(this, c);
+        }
+        else
+        {
+            this.readAnotherContentChar(c);
+        }
+        return this;
+    }
 
     private void addContentToChecklist(char c)
     {

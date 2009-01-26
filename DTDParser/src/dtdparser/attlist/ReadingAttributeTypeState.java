@@ -5,11 +5,12 @@ import dtdparser.*;
 /**
  * Se esta leyendo el tipo del atributo.
  */
-public class ReadingAttributeTypeState extends DTDState
+public class ReadingAttributeTypeState extends DTDAttlistState
 {
 public ReadingAttributeTypeState(DTDState previousState, char c)
 {
-//TODO: Llenar con algo si hace falta, o borrar.
+        super((DTDAttlistState) previousState);
+        attributeType = "" + c;
 }
 
 @Override

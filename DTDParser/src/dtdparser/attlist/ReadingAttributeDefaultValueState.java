@@ -6,11 +6,12 @@ import dtdparser.start.BeginningSpaceTrailState;
 /**
  * Se esta leyendo el tipo del atributo, quizas con blancos al final.
  */
-public class ReadingAttributeDefaultValueState extends DTDState
+public class ReadingAttributeDefaultValueState extends DTDAttlistState
 {
 public ReadingAttributeDefaultValueState(DTDState previousState, char c)
 {
-//TODO: Llenar con algo si hace falta, o borrar.
+    super((DTDAttlistState)previousState);
+this.defaultValue = "" + c;
 }
 
 @Override
@@ -26,6 +27,6 @@ return new ReadingAttributeTypeState(this, c);
 
     private void readAnotherAttributeDefaultChar(char c)
     {
-        throw new UnsupportedOperationException("Not yet implemented");
+        this.defaultValue = "" + c;
     }
 } 

@@ -8,29 +8,44 @@ import dtdparser.start.BeginningSpaceTrailState;
  */
 public class ReadingCategoryEMPTYState extends DTDState
 {
-public ReadingCategoryEMPTYState(DTDState previousState, char c)
-{
-//TODO: Llenar con algo si hace falta, o borrar.
-}
+    private String elementName;
 
-@Override
-public DTDState consumeCharacter(char c)
-{
-if(c == ' ')
-{
-return this;
-}
-else if(c == '\n')
-{
-return this;
-}
-else if(c == '>')
-{
-this.addCategoryEmptyToChecklist(c);
-return new BeginningSpaceTrailState(this, c);
-}
-else { throw new RuntimeException("Unexpected symbol.");}
-}
+    public String getElementName()
+    {
+        return elementName;
+    }
+
+    public void setElementName(String elementName)
+    {
+        this.elementName = elementName;
+    }
+
+    public ReadingCategoryEMPTYState(DTDState previousState, char c)
+    {
+        elementName = ((ReadingCategoryEMPTState) previousState).getElementName();
+    }
+
+    @Override
+    public DTDState consumeCharacter(char c)
+    {
+        if (c == ' ')
+        {
+            return this;
+        }
+        else if (c == '\n')
+        {
+            return this;
+        }
+        else if (c == '>')
+        {
+            this.addCategoryEmptyToChecklist(c);
+            return new BeginningSpaceTrailState(this, c);
+        }
+        else
+        {
+            throw new RuntimeException("Unexpected symbol.");
+        }
+    }
 
     private void addCategoryEmptyToChecklist(char c)
     {

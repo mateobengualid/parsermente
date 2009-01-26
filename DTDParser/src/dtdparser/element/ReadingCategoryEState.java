@@ -7,9 +7,22 @@ import dtdparser.*;
  */
 public class ReadingCategoryEState extends DTDState
 {
+    private String elementName;
+
+    public String getElementName()
+    {
+        return elementName;
+    }
+
+    public void setElementName(String elementName)
+    {
+        this.elementName = elementName;
+    }
+    
 public ReadingCategoryEState(DTDState previousState, char c)
 {
-//TODO: Llenar con algo si hace falta, o borrar.
+    // Proviene de leer el nombre del elemento, así que extraerlo.
+    elementName = ((WaitingForCategoryOrContentState) previousState).getElementName();
 }
 
 @Override

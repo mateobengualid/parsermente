@@ -5,30 +5,35 @@ import dtdparser.*;
 /**
  * Se esta leyendo el nombre del elemento que contendra el atributo.
  */
-public class ReadingAttElementNameState extends DTDState
+public class ReadingAttElementNameState extends DTDAttlistState
 {
-public ReadingAttElementNameState(DTDState previousState, char c)
-{
-//TODO: Llenar con algo si hace falta, o borrar.
-}
+    public ReadingAttElementNameState(DTDState previousState, char c)
+    {
+        // There is no previous state, so null is provided..
+        super(null);
+        this.attributeName = "" + c;
+    }
 
-@Override
-public DTDState consumeCharacter(char c)
-{
-if(c == ' ')
-{
-return new WaitingForAttNameState(this, c);
-}
-else if(c == '\n')
-{
-return new WaitingForAttNameState(this, c);
-}
-else this.readAnotherAttElementNameChar(c);
-return this;
-}
+    @Override
+    public DTDState consumeCharacter(char c)
+    {
+        if (c == ' ')
+        {
+            return new WaitingForAttNameState(this, c);
+        }
+        else if (c == '\n')
+        {
+            return new WaitingForAttNameState(this, c);
+        }
+        else
+        {
+            this.readAnotherAttElementNameChar(c);
+        }
+        return this;
+    }
 
     private void readAnotherAttElementNameChar(char c)
     {
-        throw new UnsupportedOperationException("Not yet implemented");
+        this.attributeName += c;
     }
-} 
+}

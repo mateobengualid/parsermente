@@ -7,28 +7,43 @@ import dtdparser.*;
  */
 public class ReadingElementNameState extends DTDState
 {
-public ReadingElementNameState(DTDState previousState, char c)
-{
-//TODO: Llenar con algo si hace falta, o borrar.
-}
+    private String elementName;
 
-@Override
-public DTDState consumeCharacter(char c)
-{
-if(c == ' ')
-{
-return new WaitingForCategoryOrContentState(this, c);
-}
-else if(c == '\n')
-{
-return new WaitingForCategoryOrContentState(this, c);
-}
-else this.readAnotherElementNameChar(c);
-return this;
-}
+    public ReadingElementNameState(DTDState previousState, char c)
+    {
+        elementName = c + "";
+    }
+
+    @Override
+    public DTDState consumeCharacter(char c)
+    {
+        if (c == ' ')
+        {
+            return new WaitingForCategoryOrContentState(this, c);
+        }
+        else if (c == '\n')
+        {
+            return new WaitingForCategoryOrContentState(this, c);
+        }
+        else
+        {
+            this.readAnotherElementNameChar(c);
+        }
+        return this;
+    }
 
     private void readAnotherElementNameChar(char c)
     {
-        throw new UnsupportedOperationException("Not yet implemented");
+        elementName += c;
+    }
+
+    public String getElementName()
+    {
+        return elementName;
+    }
+
+    public void setElementName(String elementName)
+    {
+        this.elementName = elementName;
     }
 } 
