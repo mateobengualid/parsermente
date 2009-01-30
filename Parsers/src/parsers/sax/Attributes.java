@@ -22,8 +22,7 @@ import java.util.Hashtable;
 public class Attributes {
     private Hashtable<String,String> attributeTable;
 
-    public
-    Attributes()    
+    public Attributes()    
     {
         attributeTable = new Hashtable<String, String>();
     }
@@ -31,8 +30,9 @@ public class Attributes {
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.9E94619F-AB26-8F81-D7DD-607A36F13D2C]
     // </editor-fold> 
-    public int getLength () {
-        throw new UnsupportedOperationException("Not yet implemented");
+    public int getLength () 
+    {
+        return attributeTable.size();
     }
     
     public void insertAttribute(String name, String value)

@@ -30,6 +30,5 @@ public class DOMParser
         //parser.parse(archivo, new DOMParserSAXHandler(doc));
 
         return doc;
-
     }
 }
