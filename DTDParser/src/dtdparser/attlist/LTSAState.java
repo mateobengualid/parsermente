@@ -7,18 +7,21 @@ import dtdparser.*;
  */
 public class LTSAState extends DTDState
 {
-public LTSAState(DTDState previousState, char c)
-{
-//TODO: Llenar con algo si hace falta, o borrar.
-}
+    public LTSAState(DTDState previousState, char c)
+    {
+        super(previousState);
+    }
 
-@Override
-public DTDState consumeCharacter(char c)
-{
-if(c == 'T')
-{
-return new LTSATState(this, c);
-}
-else { throw new RuntimeException("Unexpected symbol.");}
-}
+    @Override
+    public DTDState consumeCharacter(char c)
+    {
+        if (c == 'T')
+        {
+            return new LTSATState(this, c);
+        }
+        else
+        {
+            throw new RuntimeException("Unexpected symbol.");
+        }
+    }
 }

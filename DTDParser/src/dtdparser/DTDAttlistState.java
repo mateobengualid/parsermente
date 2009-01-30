@@ -57,6 +57,7 @@ public class DTDAttlistState extends DTDState
 
     public DTDAttlistState(DTDAttlistState previousState)
     {
+        super(previousState);
         if (previousState != null)
         {
             this.attributeName = previousState.getAttributeName();

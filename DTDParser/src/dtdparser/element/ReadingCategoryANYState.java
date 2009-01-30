@@ -22,7 +22,8 @@ public class ReadingCategoryANYState extends DTDState
 
     public ReadingCategoryANYState(DTDState previousState, char c)
     {
-elementName = ((ReadingCategoryANState) previousState).getElementName();
+        super(previousState);
+        elementName = ((ReadingCategoryANState) previousState).getElementName();
     }
 
     @Override

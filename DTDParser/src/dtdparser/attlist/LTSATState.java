@@ -9,7 +9,7 @@ public class LTSATState extends DTDState
 {
 public LTSATState(DTDState previousState, char c)
 {
-//TODO: Llenar con algo si hace falta, o borrar.
+super(previousState);
 }
 
 @Override

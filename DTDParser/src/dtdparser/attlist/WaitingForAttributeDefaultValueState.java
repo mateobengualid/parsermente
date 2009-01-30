@@ -7,22 +7,25 @@ import dtdparser.*;
  */
 public class WaitingForAttributeDefaultValueState extends DTDState
 {
-public WaitingForAttributeDefaultValueState(DTDState previousState, char c)
-{
-//TODO: Llenar con algo si hace falta, o borrar.
-}
+    public WaitingForAttributeDefaultValueState(DTDState previousState, char c)
+    {
+        super(previousState);
+    }
 
-@Override
-public DTDState consumeCharacter(char c)
-{
-if(c == ' ')
-{
-return this;
-}
-else if(c == '\n')
-{
-return this;
-}
-else return new ReadingAttributeDefaultValueState(this, c);
-}
+    @Override
+    public DTDState consumeCharacter(char c)
+    {
+        if (c == ' ')
+        {
+            return this;
+        }
+        else if (c == '\n')
+        {
+            return this;
+        }
+        else
+        {
+            return new ReadingAttributeDefaultValueState(this, c);
+        }
+    }
 } 

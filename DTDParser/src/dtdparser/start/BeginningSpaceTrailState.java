@@ -9,7 +9,7 @@ public class BeginningSpaceTrailState extends DTDState
 {
 public BeginningSpaceTrailState(DTDState previousState, char c)
 {
-//TODO: Llenar con algo si hace falta, o borrar.
+super(previousState);
 }
 
 @Override
@@ -23,7 +23,7 @@ else if(c == '\n')
 {
 return this;
 }
-else if(c == '&')
+else if(c == '<')
 {
 return new LTState(this, c);
 }

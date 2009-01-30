@@ -21,6 +21,8 @@ public class ReadingCategoryEMPState extends DTDState
 
     public ReadingCategoryEMPState(DTDState previousState, char c)
     {
+        super(previousState);
+
         // Proviene de leer el nombre del elemento, así que extraerlo.
         elementName = ((ReadingCategoryEMState) previousState).getElementName();
     }

@@ -9,7 +9,7 @@ public class LTSELEState extends DTDState
 {
 public LTSELEState(DTDState previousState, char c)
 {
-//TODO: Llenar con algo si hace falta, o borrar.
+super(previousState);
 }
 
 @Override

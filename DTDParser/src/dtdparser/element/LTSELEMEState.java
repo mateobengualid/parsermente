@@ -9,7 +9,7 @@ public class LTSELEMEState extends DTDState
 {
 public LTSELEMEState(DTDState previousState, char c)
 {
-//TODO: Llenar con algo si hace falta, o borrar.
+super(previousState);
 }
 
 @Override

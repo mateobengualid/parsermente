@@ -21,6 +21,7 @@ public class ReadingCategoryEMPTState extends DTDState
 
     public ReadingCategoryEMPTState(DTDState previousState, char c)
     {
+        super(previousState);
         elementName = ((ReadingCategoryEMPState) previousState).getElementName();
     }
 

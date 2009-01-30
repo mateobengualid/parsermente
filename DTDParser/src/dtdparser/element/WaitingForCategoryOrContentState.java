@@ -8,7 +8,7 @@ import dtdparser.*;
 public class WaitingForCategoryOrContentState extends DTDState
 {
     private String elementName;
-    
+
     public String getElementName()
     {
         return elementName;
@@ -21,6 +21,8 @@ public class WaitingForCategoryOrContentState extends DTDState
 
     public WaitingForCategoryOrContentState(DTDState previousState, char c)
     {
+        super(previousState);
+
         // Proviene de leer el nombre del elemento, así que extraerlo.
         elementName = ((ReadingElementNameState) previousState).getElementName();
     }

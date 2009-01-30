@@ -8,7 +8,7 @@ import dtdparser.*;
 public class ReadingCategoryAState extends DTDState
 {
     private String elementName;
-    
+
     public String getElementName()
     {
         return elementName;
@@ -18,9 +18,10 @@ public class ReadingCategoryAState extends DTDState
     {
         this.elementName = elementName;
     }
-    
+
     public ReadingCategoryAState(DTDState previousState, char c)
     {
+        super(previousState);
         elementName = ((WaitingForCategoryOrContentState) previousState).getElementName();
     }
 

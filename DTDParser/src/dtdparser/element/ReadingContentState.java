@@ -22,6 +22,7 @@ public class ReadingContentState extends DTDState
 
     public ReadingContentState(DTDState previousState, char c)
     {
+        super(previousState);
         elementName = ((WaitingForCategoryOrContentState) previousState).getElementName();
     }
 

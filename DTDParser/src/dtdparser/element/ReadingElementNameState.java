@@ -11,6 +11,7 @@ public class ReadingElementNameState extends DTDState
 
     public ReadingElementNameState(DTDState previousState, char c)
     {
+        super(previousState);
         elementName = c + "";
     }
 
