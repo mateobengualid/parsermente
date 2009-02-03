@@ -10,7 +10,6 @@
 package parsers.dom;
 
 import java.util.ArrayList;
-import java.util.Hashtable; 
 import parsers.sax.Attributes; 
 import java.util.Stack;
 import parsers.sax.SAXHandler;
@@ -25,11 +24,15 @@ import parsers.sax.SAXHandler;
 public class DOMParserSAXHandler extends SAXHandler 
 {
     private Stack<Node> stackDOM;
+    private Document doc;
+
+    public DOMParserSAXHandler(Document doc) {
+        this.doc = doc;
+    }        
     
     @Override
     public void startDocument()
-    {
-        Document doc = new Document();
+    {        
         stackDOM.add(doc);
     }
 
@@ -45,25 +48,9 @@ public class DOMParserSAXHandler extends SAXHandler
         Element node = new Element();
         node.setName(name);
         node.setAttributes(atts);
+
+        relateNode(node);
         
-        //agregar a mis hermanos
-        Node father =  stackDOM.peek();
-        ArrayList<Node> childrens = father.getHijos();
-        
-        Node leftBrother = father.getLastChild();
-        
-        if (leftBrother != null)
-        {
-            //me agrego a mi hermano izq como su hermano der
-            leftBrother.setBrotherRight(node);
-            //agrego a mi hermano izq como mi hermano izq
-            node.setBrotherLeft(leftBrother);
-        }       
-        
-        //agregarme al padre como hijo      
-        father.getHijos().add(node);        
-        //agregar a mi padre
-        node.setFather(father);
         //me agrego yo a la pila        
         stackDOM.push(node);
     }
@@ -77,5 +64,32 @@ public class DOMParserSAXHandler extends SAXHandler
     @Override
     public void characters(String chars, boolean isCDATA)
     {
-    }    
+        Text text = new Text();
+        
+        text.setName(chars);
+        text.setIsCDATA(isCDATA);
+        
+        relateNode(text);                
+    }
+
+    private void relateNode(Node node) {
+
+        //agregar a mis hermanos
+        Node father = stackDOM.peek();
+        ArrayList<Node> childrens = father.getHijos();
+
+        Node leftBrother = father.getLastChild();
+
+        if (leftBrother != null) {
+            //me agrego a mi hermano izq como su hermano der
+            leftBrother.setBrotherRight(node);
+            //agrego a mi hermano izq como mi hermano izq
+            node.setBrotherLeft(leftBrother);
+        }
+
+        //agregarme al padre como hijo
+        father.getHijos().add(node);
+        //agregar a mi padre
+        node.setFather(father);
+    }
 }

@@ -9,6 +9,12 @@
 package parsers.dom;
 
 import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import parsers.sax.SAXParser;
 
 /**
  *  @author user
@@ -16,18 +22,22 @@ import java.io.File;
 // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
 // #[regen=yes,id=DCE.634C0E9C-1A23-54E5-F34A-20D76A40C71B]
 // </editor-fold> 
-public class DOMParser
-{
-
+public class DOMParser {
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.63068A48-CD21-2EDF-2000-A26B2B73BDB1]
     // </editor-fold> 
-    public Document parse(File archivo) throws javax.xml.parsers.ParserConfigurationException, parsers.sax.SAXParserException
-    {
+    public Document parse(File archivo) throws parsers.sax.SAXParserException {
         Document doc = new Document();
+        
+        try {
+            InputStreamReader sb = null;
 
-        //SAXParser parser = SAXParserFactory.newInstance().newSAXParser();
-        //parser.parse(archivo, new DOMParserSAXHandler(doc));
+            sb = new FileReader(archivo);
+            SAXParser parser = new SAXParser(new DOMParserSAXHandler(doc));
+            parser.parse(sb);         
+        } catch (IOException ex) {
+            Logger.getLogger(DOMParser.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         return doc;
     }

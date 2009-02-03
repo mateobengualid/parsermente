@@ -34,7 +34,7 @@ public class SAXParser
         BufferedReader br = new BufferedReader(sb);
         char[] c = new char[1];
         boolean eofReached = (-1 == br.read(c));
-
+       
         while (!eofReached)
         {
             // Here it should analyze and escape characters
