@@ -25,14 +25,16 @@ public class DOMParserSAXHandler extends SAXHandler
     private Stack<Node> stackDOM;
     private Document doc;
 
-    public DOMParserSAXHandler(Document doc) {
-        this.doc = doc;
+    public DOMParserSAXHandler(Document doc) 
+    {
+        stackDOM = new Stack<Node>();
+        this.doc = doc;        
     }        
     
     @Override
     public void startDocument()
     {        
-        stackDOM.add(doc);
+        stackDOM.push(doc);
     }
 
     @Override

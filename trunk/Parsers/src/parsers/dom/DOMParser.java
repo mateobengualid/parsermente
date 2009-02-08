@@ -22,20 +22,25 @@ import parsers.sax.SAXParser;
 // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
 // #[regen=yes,id=DCE.634C0E9C-1A23-54E5-F34A-20D76A40C71B]
 // </editor-fold> 
-public class DOMParser {
+public class DOMParser 
+{
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.63068A48-CD21-2EDF-2000-A26B2B73BDB1]
     // </editor-fold> 
-    public Document parse(File archivo) throws parsers.sax.SAXParserException {
+    public Document parse(File archivo) throws parsers.sax.SAXParserException 
+    {
         Document doc = new Document();
         
-        try {
+        try 
+        {
             InputStreamReader sb = null;
 
             sb = new FileReader(archivo);
             SAXParser parser = new SAXParser(new DOMParserSAXHandler(doc));
             parser.parse(sb);         
-        } catch (IOException ex) {
+        } 
+        catch (IOException ex) 
+        {
             Logger.getLogger(DOMParser.class.getName()).log(Level.SEVERE, null, ex);
         }
 

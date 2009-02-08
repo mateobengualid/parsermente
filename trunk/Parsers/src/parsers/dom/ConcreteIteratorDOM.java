@@ -11,23 +11,80 @@ package parsers.dom;
  */
 public class ConcreteIteratorDOM implements IteratorDOM
 {
-    public Node first() 
+    private Node root;
+    private Node node;
+    private Node nextNode;
+    
+    public ConcreteIteratorDOM(Node root)
     {
-        throw new UnsupportedOperationException("Not supported yet.");
+        this.root = root;
+        this.nextNode = root;
     }
-
+    
     public Node next() 
-    {
-        throw new UnsupportedOperationException("Not supported yet.");
+    {          
+        node = nextNode;
+        nextNode = getNextNode();                    
+        
+        return node;
     }
-
+        
+    private Node getNextNode()
+    {        
+        Node result;
+        
+        //si tiene hijos retorna el primer hijo
+        if(node.hasChildNodes())
+        {                        
+            result = node.getFirstChild();
+        }
+        else 
+        {   //si tiene hermano derecho lo retorna
+            if(node.getBrotherRight() != null)
+            {
+                result = node.getBrotherRight();
+            }
+            else
+            {
+                //mientras no exista el tio derecho
+                while(node.getFather().getBrotherRight() == null)
+                {
+                    //si no es el nodo raiz tiene padre
+                    if(node != root)
+                    {
+                        node = node.getFather();    
+                    }
+                    else
+                    {
+                        result = null;
+                    }
+                }
+              
+                result = node.getFather().getBrotherRight();                
+            }
+        }
+        
+        return result;
+    }
+    
     public boolean hasMoreElements() 
     {
-        throw new UnsupportedOperationException("Not supported yet.");
+        boolean result;
+        
+        if(nextNode == null)
+        {
+            result = false;
+        }
+        else
+        {
+            result = true;
+        }
+        
+        return result;
     }
 
     public Node getCurrentElement() 
     {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return nextNode;
     }
 }
