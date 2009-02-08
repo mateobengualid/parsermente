@@ -9,7 +9,6 @@
 
 package parsers.dom;
 
-import java.util.ArrayList;
 import parsers.sax.Attributes; 
 import java.util.Stack;
 import parsers.sax.SAXHandler;
@@ -72,15 +71,14 @@ public class DOMParserSAXHandler extends SAXHandler
         relateNode(text);                
     }
 
-    private void relateNode(Node node) {
-
+    private void relateNode(Node node) 
+    {
         //agregar a mis hermanos
-        Node father = stackDOM.peek();
-        ArrayList<Node> childrens = father.getHijos();
-
+        Node father = stackDOM.peek();        
         Node leftBrother = father.getLastChild();
 
-        if (leftBrother != null) {
+        if (leftBrother != null) 
+        {
             //me agrego a mi hermano izq como su hermano der
             leftBrother.setBrotherRight(node);
             //agrego a mi hermano izq como mi hermano izq
@@ -88,7 +86,7 @@ public class DOMParserSAXHandler extends SAXHandler
         }
 
         //agregarme al padre como hijo
-        father.getHijos().add(node);
+        father.getChildren().add(node);
         //agregar a mi padre
         node.setFather(father);
     }
