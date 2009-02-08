@@ -16,15 +16,31 @@ package parsers.dom;
 // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
 // #[regen=yes,id=DCE.00FE490D-01C3-3622-2E86-CFD722CF8D48]
 // </editor-fold> 
-public class Document extends Node
+public class Document extends Node implements AggregateDOM
 {
     private Element prologue;
         
-    public Element getPrologue() {
+    public Element getPrologue() 
+    {
         return prologue;
     }
 
-    public void setPrologue(Element prologue) {
+    public void setPrologue(Element prologue) 
+    {
         this.prologue = prologue;
-    }    
+    }
+
+    public IteratorDOM getIteratorDOM() 
+    {
+        if(this.hasChildNodes())
+        {                      
+            ConcreteIteratorDOM iterator = new ConcreteIteratorDOM(this.getFirstChild());
+        
+            return iterator;        
+        }
+        else
+        {
+            return null;
+        }       
+    }        
 }

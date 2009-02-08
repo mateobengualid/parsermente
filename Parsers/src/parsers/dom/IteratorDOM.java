@@ -11,7 +11,6 @@ package parsers.dom;
  */
 public interface IteratorDOM 
 {
-    public Node first();
     public Node next();
     public boolean hasMoreElements();
     public Node getCurrentElement();
