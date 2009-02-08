@@ -27,6 +27,11 @@ public class DTDModelHelper
             actualState = actualState.consumeCharacter((char)inputStream.read());
         }
         
+        if (!(actualState instanceof BeginningSpaceTrailState))
+        {
+            throw new DTDValidatorException("The documento is not in DTD format.");
+        }
+        
         return model;
     }
 }
