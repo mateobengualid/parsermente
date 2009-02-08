@@ -60,14 +60,14 @@ public class Node
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.B9C7847E-51AA-CD1B-C3CE-08FF0E34FCE8]
     // </editor-fold> 
-    public ArrayList<Node> getHijos () {
+    public ArrayList<Node> getChildren () {
 	return children;
     }
 
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.EFC5B6A9-DAB7-7083-D450-62EA07A8BA6C]
     // </editor-fold> 
-    public void setHijos (ArrayList<Node> hijos) {
+    public void setChildren (ArrayList<Node> hijos) {
 	this.children = hijos;
     }
     
@@ -103,7 +103,7 @@ public class Node
     
     public Node getLastChild()
     {
-        if (children.size() > 0)
+        if (hasChildNodes())
         {
              return children.get(children.size()-1);
         }
@@ -111,5 +111,29 @@ public class Node
         {
             return null;
         }
+    }
+    
+    public Node getFirstChild()
+    {
+        if(hasChildNodes())
+        {
+            return children.get(0);
+        }
+        else
+        {
+            return null;
+        }
+    }
+    
+    public boolean hasChildNodes()
+    {
+        boolean value = false;
+        
+        if(children.size() > 0)
+        {
+            value = true;
+        }        
+        
+        return value;
     }
 }
