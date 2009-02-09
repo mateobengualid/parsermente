@@ -9,8 +9,12 @@
 package parsers;
 
 import java.io.File;
-import parsers.dom.DOMParser;
-import parsers.dom.Document;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import parsers.sax.SAXParser;
 
 /**
  *  @author Mateo
@@ -27,11 +31,22 @@ public class Main
     // #[regen=yes,id=DCE.983D08A2-CB50-F4D8-2269-E1E590CE679A]
     // </editor-fold> 
     public static void main(String[] args)
-    {       
-        DOMParser parser = new DOMParser();
-        File f = new File("algun.xml");
-            
-        Document doc = parser.parse(f);        
-        System.out.println("Terminado de parsear");
+    {
+        try
+        {
+            File f = new File("algun.xml");
+            InputStreamReader sb;
+            SAXParser instance = new SAXParser(new TestHandler());
+            sb = new FileReader(f);
+            instance.parse(sb);
+
+//        DOMParser parser = new DOMParser();
+//        Document doc = parser.parse(f);
+//        System.out.println("Terminado de parsear");
+        }
+        catch (IOException ex)
+        {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }
