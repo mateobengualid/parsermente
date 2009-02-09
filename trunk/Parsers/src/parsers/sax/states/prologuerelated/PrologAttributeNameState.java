@@ -23,7 +23,7 @@ public class PrologAttributeNameState extends SAXParserState
 
     public PrologAttributeNameState(String name, Attributes attributes)
     {
-        this.name = name;
+        this.lastAttributeName = name;
         this.attributes = attributes;
     }
 
@@ -48,7 +48,15 @@ public class PrologAttributeNameState extends SAXParserState
         }
         else
         {
-            this.lastAttributeName += c;
+            if (this.lastAttributeName != null)
+            {
+                this.lastAttributeName += c;
+            }
+            else
+            {
+                this.lastAttributeName = "" + c;
+            }
+
             return this;
         }
     }

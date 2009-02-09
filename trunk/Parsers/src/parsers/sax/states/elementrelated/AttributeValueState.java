@@ -34,11 +34,12 @@ public class AttributeValueState extends SAXParserState
     @Override
     public SAXParserState consumeCharacter(char c, Stack<String> stack, boolean escaped, SAXHandler handler) throws SAXParserException
     {
-        if (c == '<')
+        // TODO: Esto es pedido por las reglas de well-formedness, pero no es util.
+        /*if (c == '<')
         {
-            throw new SAXParserException("'<' can't be inside the value of an attribute");
+        throw new SAXParserException("'<' can't be inside the value of an attribute");
         }
-        else if (c == enclosingChar)
+        else*/ if (c == enclosingChar)
         {
             attributes.insertAttribute(lastAttributeName, lastAttributeValue);
             return new WaitingAttributeState(name, attributes);

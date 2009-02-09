@@ -107,5 +107,9 @@ public class SAXParser
         {
             throw new SAXParserException("The document was bad formatted or incomplete");
         }
+        else
+        {
+            handler.endDocument();
+        }
     }
 }
