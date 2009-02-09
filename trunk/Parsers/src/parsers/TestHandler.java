@@ -15,6 +15,18 @@ import parsers.sax.SAXHandler;
 public class TestHandler extends SAXHandler
 {
     @Override
+    public void startDocument(Attributes xmlPrologue)
+    {
+        System.out.println("Comienza el documento");
+    }
+
+    @Override
+    public void endDocument()
+    {
+        System.out.println("Termina el documento");
+    }
+        
+    @Override
     public void startElement(String name, Attributes atts)
     {
         System.out.print(name + " - ");
@@ -30,7 +42,7 @@ public class TestHandler extends SAXHandler
     @Override
     public void characters(String chars, boolean isCDATA)
     {
-        System.out.println((isCDATA ? "CDATA:" : "") + chars);
+        System.out.print((isCDATA ? "CDATA:" : "") + chars);
     }
 
     @Override
