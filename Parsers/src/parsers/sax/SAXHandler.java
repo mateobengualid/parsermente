@@ -15,7 +15,7 @@ package parsers.sax;
 
 public class SAXHandler
 {
-    public void startDocument()
+    public void startDocument(Attributes xmlPrologue)
     {
     }
 

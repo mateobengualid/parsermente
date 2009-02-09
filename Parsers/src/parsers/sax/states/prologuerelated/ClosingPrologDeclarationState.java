@@ -37,9 +37,11 @@ public class ClosingPrologDeclarationState extends SAXParserState
     {
         if (c == '>')
         {
-            // TODO Add here some acquisition of the real bullshit prolog data, that is:
-            // version, standalone and encoding
-            return new PrologOrRootState(null);
+            // Check the prolog data, that is: version, standalone and encoding.
+            ClosingPrologDeclarationState.checkForCorrectPrologue(attributes);
+            handler.startDocument(attributes);
+            
+            return new PrologOrRootState(attributes);
         }
         else
         {
@@ -57,5 +59,33 @@ public class ClosingPrologDeclarationState extends SAXParserState
     public boolean canFinalize()
     {
         return false;
+    }
+
+    private static void checkForCorrectPrologue(Attributes xmlAttributes)
+    {
+        String attValue;
+
+        attValue = xmlAttributes.getValue("version");
+        if (attValue == null)
+        {
+            xmlAttributes.insertAttribute("version", "1.0");
+        }
+
+        attValue = xmlAttributes.getValue("standalone");
+        if (attValue == null)
+        {
+            xmlAttributes.insertAttribute("standalone", "yes");
+        }
+
+        attValue = xmlAttributes.getValue("encoding");
+        if (attValue == null)
+        {
+            xmlAttributes.insertAttribute("encoding", "UTF-8");
+        }
+
+        if (xmlAttributes.getLength() != 3)
+        {
+            throw new SAXParserException("XML prologue has invalid attributes");
+        }
     }
 }
