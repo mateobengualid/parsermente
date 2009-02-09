@@ -31,36 +31,36 @@ public class ConcreteIteratorDOM implements IteratorDOM
         
     private Node getNextNode()
     {        
-        Node result;
+        Node result = nextNode;
         
         //si tiene hijos retorna el primer hijo
-        if(node.hasChildNodes())
+        if(result.hasChildNodes())
         {                        
-            result = node.getFirstChild();
+            result = result.getFirstChild();
         }
         else 
         {   //si tiene hermano derecho lo retorna
-            if(node.getBrotherRight() != null)
+            if(result.getBrotherRight() != null)
             {
-                result = node.getBrotherRight();
+                result = result.getBrotherRight();
             }
             else
             {
-                //mientras no exista el tio derecho
-                while(node.getFather().getBrotherRight() == null)
+                //mientras no exista el tio derecho y no sea la raiz
+                while((result.getFather().getBrotherRight() == null) && (result != root))
                 {
                     //si no es el nodo raiz tiene padre
-                    if(node != root)
-                    {
-                        node = node.getFather();    
-                    }
-                    else
-                    {
-                        result = null;
-                    }
+                    result = result.getFather();    
                 }
-              
-                result = node.getFather().getBrotherRight();                
+
+                if(result == root)
+                {
+                    result = null;
+                }
+                else
+                {
+                    result = result.getFather().getBrotherRight();                
+                }                                
             }
         }
         
@@ -85,6 +85,6 @@ public class ConcreteIteratorDOM implements IteratorDOM
 
     public Node getCurrentElement() 
     {
-        return nextNode;
+        return node;
     }
 }

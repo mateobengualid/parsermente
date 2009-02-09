@@ -22,19 +22,26 @@ import parsers.sax.SAXHandler;
 // </editor-fold> 
 public class DOMParserSAXHandler extends SAXHandler 
 {
+    private boolean preserveWhitespace;
     private Stack<Node> stackDOM;
     private Document doc;
 
     public DOMParserSAXHandler(Document doc) 
     {
-        stackDOM = new Stack<Node>();
+        this.stackDOM = new Stack<Node>();        
+        this.preserveWhitespace = false;        
         this.doc = doc;        
     }        
     
     @Override
-    public void startDocument()
+    public void startDocument(Attributes xmlPrologue)
     {        
-        stackDOM.push(doc);
+        Element element = new Element();              
+        
+        element.setAttributes(xmlPrologue);
+        
+        doc.setPrologue(element);
+        stackDOM.push(doc);        
     }
 
     @Override
@@ -64,15 +71,32 @@ public class DOMParserSAXHandler extends SAXHandler
 
     @Override
     public void characters(String chars, boolean isCDATA)
+    {              
+        if(preserveWhitespace)
+        {
+            createTextNode(chars, isCDATA);
+        }
+        else
+        {
+            chars = chars.trim();
+            
+            if (!chars.isEmpty()) 
+            {
+                createTextNode(chars, isCDATA);
+            }                
+        }        
+    }    
+    
+    private void createTextNode(String chars, boolean isCDATA)
     {
         Text text = new Text();
-        
+
         text.setName(chars);
         text.setIsCDATA(isCDATA);
-        
-        relateNode(text);                
-    }
 
+        relateNode(text);
+    }
+    
     private void relateNode(Node node) 
     {
         //agregar a mis hermanos
@@ -91,5 +115,15 @@ public class DOMParserSAXHandler extends SAXHandler
         father.getChildren().add(node);
         //agregar a mi padre
         node.setFather(father);
+    }
+
+    public boolean isPreserveWhitespace() 
+    {
+        return preserveWhitespace;
+    }
+
+    public void setPreserveWhitespace(boolean preserveWhitespace) 
+    {
+        this.preserveWhitespace = preserveWhitespace;
     }
 }
