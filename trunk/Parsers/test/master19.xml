@@ -1,0 +1,63 @@
+<xml xmlns:v="urn:schemas-microsoft-com:vml"
+ xmlns:o="urn:schemas-microsoft-com:office:office"
+ xmlns:p="urn:schemas-microsoft-com:office:powerpoint"
+ xmlns:oa="urn:schemas-microsoft-com:office:activation">
+ <p:slidetransition advancetime="0" effect="alphafade" flag="1"/>
+ <o:shapelayout v:ext="edit">
+  <o:idmap v:ext="edit" data="422"/>
+ </o:shapelayout><p:colorscheme
+  colors="#003399,#ffffff,#000000,#ffb601,#f7e993,#66cc66,#1d509b,#ff6633"/>
+ <v:background id="_x0000_s432129" o:bwmode="white" o:targetscreensize="800,600">
+  <v:fill src="master19_image003.jpg" o:title="2-10364_BAK1" color2="#6c6 [5]"
+   recolor="t" type="frame"/>
+ </v:background><p:shaperange id="_x0000_m432130">
+  <v:shapetype id="_x0000_m432130" style='position:absolute;left:27.5pt;top:18pt;
+   width:662.5pt;height:59.125pt' coordsize="21600,21600" o:master="" o:spt="1"
+   path="m,l,21600r21600,l21600,xe" filled="f" fillcolor="#f7e993 [4]"
+   stroked="f" strokecolor="white [1]">
+   <v:fill color2="#039 [0]" o:detectmouseclick="t"/>
+   <v:stroke joinstyle="miter" o:forcedash="t"/>
+   <v:shadow color="black [2]" opacity="48497f" offset="1pt,1pt" offset2="-2pt,-2pt"/>
+   <v:path gradientshapeok="t" o:connecttype="rect"/>
+   <o:lock v:ext="edit" grouping="t"/>
+   <v:textbox style='mso-fit-shape-to-text:t'/>
+   <p:placeholder type="title"/>
+  </v:shapetype></p:shaperange>
+ <p:shaperange id="_x0000_m432131">
+  <v:shapetype id="_x0000_m432131" style='position:absolute;left:27.75pt;top:125.75pt;
+   width:662.25pt;height:174.375pt' coordsize="21600,21600" o:master="" o:spt="1"
+   path="m,l,21600r21600,l21600,xe" filled="f" fillcolor="#f7e993 [4]"
+   stroked="f" strokecolor="white [1]">
+   <v:fill color2="#039 [0]" o:detectmouseclick="t"/>
+   <v:stroke joinstyle="miter" o:forcedash="t"/>
+   <v:shadow color="black [2]" opacity=".5" offset="1pt,0" offset2="-10pt,-12pt"/>
+   <v:path gradientshapeok="t" o:connecttype="rect"/>
+   <o:lock v:ext="edit" grouping="t"/>
+   <v:textbox style='mso-fit-shape-to-text:t'/>
+   <p:placeholder type="body" position="1"/>
+  </v:shapetype></p:shaperange>
+ <p:shaperange id="_x0000_s432133">
+  <v:shapetype id="_x0000_t75" coordsize="21600,21600" o:spt="75"
+   o:preferrelative="t" path="m@4@5l@4@11@9@11@9@5xe" filled="f" stroked="f">
+   <v:stroke joinstyle="miter"/>
+   <v:formulas>
+    <v:f eqn="if lineDrawn pixelLineWidth 0"/>
+    <v:f eqn="sum @0 1 0"/>
+    <v:f eqn="sum 0 0 @1"/>
+    <v:f eqn="prod @2 1 2"/>
+    <v:f eqn="prod @3 21600 pixelWidth"/>
+    <v:f eqn="prod @3 21600 pixelHeight"/>
+    <v:f eqn="sum @0 0 1"/>
+    <v:f eqn="prod @6 1 2"/>
+    <v:f eqn="prod @7 21600 pixelWidth"/>
+    <v:f eqn="sum @8 21600 0"/>
+    <v:f eqn="prod @7 21600 pixelHeight"/>
+    <v:f eqn="sum @10 21600 0"/>
+   </v:formulas>
+   <v:path o:extrusionok="f" gradientshapeok="t" o:connecttype="rect"/>
+   <o:lock v:ext="edit" aspectratio="t"/>
+  </v:shapetype><v:shape id="_x0000_s432133" type="#_x0000_t75" style='position:absolute;
+   left:0;top:506.25pt;width:203.25pt;height:33.75pt'>
+   <v:imagedata src="master19_image004.png" o:title="logo"/>
+  </v:shape></p:shaperange>
+</xml>

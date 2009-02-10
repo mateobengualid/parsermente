@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="ConsoleApplication2">
+</Property><Property Name="Solution File" Value="C:\Documents and Settings\mariorm\My Documents\Workshop\Demos\Value Types &amp; Reference Types\Demos\Constructors in ILDASM\VB.NET\ConsoleApplication2.sln">
+</Property><Property Name="Date" Value="Sunday, August 28, 2005">
+</Property><Property Name="Time" Value="13:03:48 PM">
+</Property></Properties><Event ErrorLevel="0" Project="ConsoleApplication2" Source="ConsoleApplication2.vbproj" Description="Project file successfully backed up as C:\Documents and Settings\mariorm\My Documents\Workshop\Demos\Value Types &amp; Reference Types\Demos\Constructors in ILDASM\VB.NET\Backup\ConsoleApplication2.vbproj">
+</Event><Event ErrorLevel="0" Project="ConsoleApplication2" Source="ConsoleApplication2.vbproj.user" Description="Project user file successfully backed up as C:\Documents and Settings\mariorm\My Documents\Workshop\Demos\Value Types &amp; Reference Types\Demos\Constructors in ILDASM\VB.NET\Backup\ConsoleApplication2.vbproj.user">
+</Event><Event ErrorLevel="0" Project="ConsoleApplication2" Source="AssemblyInfo.vb" Description="File successfully backed up as C:\Documents and Settings\mariorm\My Documents\Workshop\Demos\Value Types &amp; Reference Types\Demos\Constructors in ILDASM\VB.NET\Backup\AssemblyInfo.vb">
+</Event><Event ErrorLevel="0" Project="ConsoleApplication2" Source="Module1.vb" Description="File successfully backed up as C:\Documents and Settings\mariorm\My Documents\Workshop\Demos\Value Types &amp; Reference Types\Demos\Constructors in ILDASM\VB.NET\Backup\Module1.vb">
+</Event><Event ErrorLevel="0" Project="ConsoleApplication2" Source="ConsoleApplication2.vbproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="ConsoleApplication2" Source="ConsoleApplication2.vbproj" Description="Converted">
+</Event></UpgradeLog>
