@@ -2,7 +2,6 @@ package parsers.dtd.attlist;
 
 import parsers.dtd.model.DTDState;
 import parsers.dtd.model.DTDAttlistState;
-import parsers.*;
 
 /**
  * Se esta leyendo el nombre del elemento que contendra el atributo.

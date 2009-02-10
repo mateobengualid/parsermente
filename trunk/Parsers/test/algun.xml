@@ -1,5 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<!DOCTYPE root [
+<!ELEMENT root (elem1,elem2,elem3,elem3,elem4)>
+<!ELEMENT elem1 (elem1,elem2,elem3,elem3,elem4)>
+<!ELEMENT elem2 EMPTY>
+<!ELEMENT elem3 (#PCDATA)>
+<!ELEMENT elem4 (otro*)>
+<!ELEMENT otro (#CDATA|algomas*)>
+<!ATTLIST elem1 version CDATA "1.12358">
+<!ATTLIST elem3 att1 CDATA #REQUIRED>
+<!ATTLIST elem3 att2 #FIXED "algo2">
+<!ATTLIST elem3 att3 #IMPLIED>
+<!ATTLIST otro att #IMPLIED>
+]>
+
 <!--
     Document   : newXMLDocument.xml
     Created on : 21 de octubre de 2007, 15:07
@@ -15,7 +29,7 @@
 	HH
 	<![CDATA[Algo para destacar]]>
     </elem3>
-    <elem3 att1="algo1" att2="algo2"/>
+    <elem3 att1="algo1" att2="algo2" att3="huevada"/>
     <elem4>
 	<otro/>
 	<otro att="asd">

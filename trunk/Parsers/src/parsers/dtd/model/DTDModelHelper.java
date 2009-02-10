@@ -4,10 +4,8 @@
  */
 package parsers.dtd.model;
 
-import parsers.dtd.model.DTDState;
 import parsers.dtd.start.BeginningSpaceTrailState;
 import java.io.IOException;
-import java.io.InputStream;
 
 /**
  *

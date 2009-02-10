@@ -2,7 +2,6 @@ package parsers.dtd.attlist;
 
 import parsers.dtd.model.DTDState;
 import parsers.dtd.model.DTDAttlistState;
-import parsers.*;
 
 /**
  * Se esta leyendo el nombre del atributo.
@@ -35,6 +34,6 @@ public class ReadingAttributeNameState extends DTDAttlistState
 
     private void readAnotherAttributeNameChar(char c)
     {
-        throw new UnsupportedOperationException("Not yet implemented");
+        this.attributeName += c;
     }
 } 
