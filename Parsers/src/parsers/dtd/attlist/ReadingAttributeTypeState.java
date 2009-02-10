@@ -9,26 +9,29 @@ import parsers.*;
  */
 public class ReadingAttributeTypeState extends DTDAttlistState
 {
-public ReadingAttributeTypeState(DTDState previousState, char c)
-{
+    public ReadingAttributeTypeState(DTDState previousState, char c)
+    {
         super((DTDAttlistState) previousState);
         attributeType = "" + c;
-}
+    }
 
-@Override
-public DTDState consumeCharacter(char c)
-{
-if(c == ' ')
-{
-return new WaitingForAttributeDefaultValueState(this, c);
-}
-else if(c == '\n')
-{
-return new WaitingForAttributeDefaultValueState(this, c);
-}
-else this.readAnotherAttributeTypeChar(c);
-return this;
-}
+    @Override
+    public DTDState consumeCharacter(char c)
+    {
+        if (c == ' ')
+        {
+            return new WaitingForAttributeDefaultValueState(this, c);
+        }
+        else if (c == '\n')
+        {
+            return new WaitingForAttributeDefaultValueState(this, c);
+        }
+        else
+        {
+            this.readAnotherAttributeTypeChar(c);
+        }
+        return this;
+    }
 
     private void readAnotherAttributeTypeChar(char c)
     {
