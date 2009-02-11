@@ -38,7 +38,8 @@ public class TextElementState extends SAXParserState
                 handler.characters(text, false);
                 return new LTElementState(new InsideElementState(handler), handler);
             }
-            else if ((c != '&') && (c != '\'') && (c != '\"') && (c != '>'))
+            // Solo para & y < se requiere chequeo de escape.
+            else if (c != '&')
             {
                 text += c;
                 return this;
