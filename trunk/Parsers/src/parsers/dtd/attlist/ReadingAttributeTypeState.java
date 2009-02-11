@@ -35,6 +35,6 @@ public class ReadingAttributeTypeState extends DTDAttlistState
 
     private void readAnotherAttributeTypeChar(char c)
     {
-        throw new UnsupportedOperationException("Not yet implemented");
+        attributeType += c;
     }
 } 

@@ -19,20 +19,22 @@ public class WaitingPrologAttributeState extends SAXParserState
     private String name;
     private Attributes attributes;
 
-    public WaitingPrologAttributeState(String name)
+    public WaitingPrologAttributeState(String name, SAXHandler userHandler)
     {
+        super(userHandler);
         this.name = name;
         attributes = new Attributes();
     }
 
-    public WaitingPrologAttributeState(String name, Attributes attributes)
+    public WaitingPrologAttributeState(String name, Attributes attributes, SAXHandler userHandler)
     {
+        super(userHandler);
         this.name = name;
         this.attributes = attributes;
     }
 
     @Override
-    public SAXParserState consumeCharacter(char c, Stack<String> stack, boolean escaped, SAXHandler handler) throws SAXParserException
+    public SAXParserState consumeCharacter(char c, Stack<String> stack, boolean escaped) throws SAXParserException
     {
         // Si todavia no llega el nombre o el fin de etiqueta
         if (c == ' ')
@@ -52,12 +54,12 @@ public class WaitingPrologAttributeState extends SAXParserState
         // Llegado al final de la declaracion        
         else if (c == '?')
         {
-            return new ClosingPrologDeclarationState(name, attributes);
+            return new ClosingPrologDeclarationState(name, attributes, handler);
         }
         // Una cadena de texto que marca el nombre del atributo
         else
         {
-            return new PrologAttributeNameState("" + c, attributes);
+            return new PrologAttributeNameState("" + c, attributes, handler);
         }
     }
 

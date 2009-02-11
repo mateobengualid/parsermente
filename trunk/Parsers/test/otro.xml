@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!DOCTYPE root SYSTEM "algun.dtd"!>
+<!DOCTYPE root SYSTEM "./test/algun.dtd" >
 
 <!--
     Document   : newXMLDocument.xml
@@ -17,12 +17,14 @@
 	HH
 	<![CDATA[Algo para destacar]]>
     </elem3>
-    <elem3 att1="algo1" att2="algo2"/>
+    <elem3 att1="algo1" att2="algo2" att3="huevada"/>
     <elem4>
-	<otro/>
-	<otro att="asd">
-	    Hola
-	    <algomas/>
-	</otro>
-    </elem4> 
+        <otro>
+            <algomas/>
+            <algomas/>
+        </otro>
+        <otro att="asd">
+            <algomas/>
+        </otro>
+    </elem4>
 </root>

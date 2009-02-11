@@ -1,12 +1,12 @@
 <!ELEMENT root (elem1,elem2,elem3,elem3,elem4)>
-<!ELEMENT elem1 (elem1,elem2,elem3,elem3,elem4)>
+<!ELEMENT elem1 (#PCDATA)>
 <!ELEMENT elem2 EMPTY>
-<!ELEMENT elem3 (#PCDATA)>
+<!ELEMENT elem3 ANY>
 <!ELEMENT elem4 (otro*)>
-<!ELEMENT otro (#CDATA|algomas*)>
+<!ELEMENT otro (algomas+)>
+<!ELEMENT algomas EMPTY>
 <!ATTLIST elem1 version CDATA "1.12358">
 <!ATTLIST elem3 att1 CDATA #REQUIRED>
-<!ATTLIST elem3 att2 #FIXED "algo2">
-<!ATTLIST elem3 att3 #IMPLIED>
-<!ATTLIST otro att #IMPLIED>
-
+<!ATTLIST elem3 att2 CDATA #FIXED "algo2">
+<!ATTLIST elem3 att3 CDATA #IMPLIED>
+<!ATTLIST otro att CDATA #IMPLIED>

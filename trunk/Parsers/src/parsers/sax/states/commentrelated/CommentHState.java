@@ -17,21 +17,22 @@ public class CommentHState extends SAXParserState
 {
     private SAXParserState previousState;
 
-    public CommentHState(SAXParserState previousState)
+    public CommentHState(SAXParserState previousState, SAXHandler userHandler)
     {
+        super(userHandler);
         this.previousState = previousState;
     }
 
     @Override
-    public SAXParserState consumeCharacter(char c, Stack<String> stack, boolean escaped, SAXHandler handler) throws SAXParserException
+    public SAXParserState consumeCharacter(char c, Stack<String> stack, boolean escaped) throws SAXParserException
     {
         if (c == '-')
         {
-            return new CommentHHExpectingGTState(previousState);
+            return new CommentHHExpectingGTState(previousState, handler);
         }
         else
         {
-            return new CommentState(previousState);
+            return new CommentState(previousState, handler);
         }
     }
 

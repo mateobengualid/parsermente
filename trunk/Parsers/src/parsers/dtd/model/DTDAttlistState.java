@@ -67,6 +67,11 @@ public class DTDAttlistState extends DTDState
         }
     }
 
+    public DTDAttlistState(DTDState previousState)
+    {
+        super(previousState);
+    }
+
     @Override
     public DTDState consumeCharacter(char c)
     {

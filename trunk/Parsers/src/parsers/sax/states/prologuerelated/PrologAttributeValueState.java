@@ -22,8 +22,9 @@ public class PrologAttributeValueState extends SAXParserState
     private Attributes attributes;
     private char enclosingChar;
 
-    public PrologAttributeValueState(String name, String lastAttributeName, Attributes attributes, char enclosingChar)
+    public PrologAttributeValueState(String name, String lastAttributeName, Attributes attributes, char enclosingChar, SAXHandler userHandler)
     {
+        super(userHandler);
         this.name = name;
         this.lastAttributeName = lastAttributeName;
         this.lastAttributeValue = "";
@@ -32,7 +33,7 @@ public class PrologAttributeValueState extends SAXParserState
     }
 
     @Override
-    public SAXParserState consumeCharacter(char c, Stack<String> stack, boolean escaped, SAXHandler handler) throws SAXParserException
+    public SAXParserState consumeCharacter(char c, Stack<String> stack, boolean escaped) throws SAXParserException
     {
         if (c == '<')
         {
@@ -41,7 +42,7 @@ public class PrologAttributeValueState extends SAXParserState
         else if (c == enclosingChar)
         {
             attributes.insertAttribute(lastAttributeName, lastAttributeValue);
-            return new WaitingPrologAttributeState(name, attributes);
+            return new WaitingPrologAttributeState(name, attributes, handler);
         }
         else
         {

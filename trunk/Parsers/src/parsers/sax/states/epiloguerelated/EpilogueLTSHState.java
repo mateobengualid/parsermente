@@ -19,16 +19,17 @@ import parsers.sax.states.commentrelated.CommentState;
  */
 public class EpilogueLTSHState extends SAXParserState
 {
-    public EpilogueLTSHState()
+    public EpilogueLTSHState(SAXHandler userHandler)
     {
+        super(userHandler);
     }
 
     @Override
-    public SAXParserState consumeCharacter(char c, Stack<String> stack, boolean escaped, SAXHandler handler) throws SAXParserException
+    public SAXParserState consumeCharacter(char c, Stack<String> stack, boolean escaped) throws SAXParserException
     {
         if (c == '-')
         {
-            return new CommentState(new EpilogueWaitingForEndState());
+            return new CommentState(new EpilogueWaitingForEndState(handler), handler);
         }
         else
         {

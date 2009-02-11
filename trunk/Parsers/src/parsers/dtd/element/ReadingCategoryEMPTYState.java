@@ -2,6 +2,8 @@ package parsers.dtd.element;
 
 import parsers.dtd.model.DTDState;
 import parsers.*;
+import parsers.dtd.model.DTDValidatorException;
+import parsers.dtd.model.ElementConstraint;
 import parsers.dtd.start.BeginningSpaceTrailState;
 
 /**
@@ -51,6 +53,12 @@ public class ReadingCategoryEMPTYState extends DTDState
 
     private void addCategoryEmptyToChecklist(char c)
     {
-        throw new UnsupportedOperationException("Not yet implemented");
+        ElementConstraint ec = new ElementConstraint();
+        ec.setAny(false);
+        ec.setEmpty(true);
+        if (this.getModel().getChildConstraints().put(elementName, ec) != null)
+        {
+            throw new DTDValidatorException("The element has already been defined.");
+        }
     }
 }

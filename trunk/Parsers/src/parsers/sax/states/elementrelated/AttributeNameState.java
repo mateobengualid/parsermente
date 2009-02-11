@@ -21,30 +21,32 @@ public class AttributeNameState extends SAXParserState
     private String lastAttributeName;
     private Attributes attributes;
 
-    public AttributeNameState(String name, Attributes attributes)
+    public AttributeNameState(String name, Attributes attributes, SAXHandler userHandler)
     {
+        super(userHandler);
         this.name = name;
         this.attributes = attributes;
     }
 
-    public AttributeNameState(String name, String lastAttributeName, Attributes attributes)
+    public AttributeNameState(String name, String lastAttributeName, Attributes attributes, SAXHandler userHandler)
     {
+        super(userHandler);
         this.name = name;
         this.lastAttributeName = lastAttributeName;
         this.attributes = attributes;
     }
 
     @Override
-    public SAXParserState consumeCharacter(char c, Stack<String> stack, boolean escaped, SAXHandler handler) throws SAXParserException
+    public SAXParserState consumeCharacter(char c, Stack<String> stack, boolean escaped) throws SAXParserException
     {
         // Si se acabo el nombre al llegar un blanco
         if (c == ' ')
         {
-            return new WaitingEqualForAttributeState(name, lastAttributeName, attributes);
+            return new WaitingEqualForAttributeState(name, lastAttributeName, attributes, handler);
         }
         else if (c == '=')
         {
-            return new WaitingValueForAttributeState(name, lastAttributeName, attributes);
+            return new WaitingValueForAttributeState(name, lastAttributeName, attributes, handler);
         }
         else
         {

@@ -18,17 +18,18 @@ public class LTSHState extends SAXParserState
 {
     private SAXParserState previousState;
 
-    public LTSHState(SAXParserState previousState)
+    public LTSHState(SAXParserState previousState, SAXHandler userHandler)
     {
+        super(userHandler);
         this.previousState = previousState;
     }
 
     @Override
-    public SAXParserState consumeCharacter(char c, Stack<String> stack, boolean escaped, SAXHandler handler) throws SAXParserException
+    public SAXParserState consumeCharacter(char c, Stack<String> stack, boolean escaped) throws SAXParserException
     {
         if (c == '-')
         {
-            return new CommentState(previousState);
+            return new CommentState(previousState, handler);
         }
         else
         {

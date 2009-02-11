@@ -16,18 +16,19 @@ import parsers.sax.SAXParserException;
  */
 public class LTSLBCDATAState extends SAXParserState
 {
-    public LTSLBCDATAState()
+    public LTSLBCDATAState(SAXHandler userHandler)
     {
+        super(userHandler);
     }
 
     @Override
-    public SAXParserState consumeCharacter(char c, Stack<String> stack, boolean escaped, SAXHandler handler) throws SAXParserException
+    public SAXParserState consumeCharacter(char c, Stack<String> stack, boolean escaped) throws SAXParserException
     {
         // Should ask for each character consecutively until CDATA[ is spelled
         if (c == '[')
         {
             // Finalmente, dentro de un CDATA!
-            return new InsideCDATAState("");
+            return new InsideCDATAState("", handler);
         }
         else
         {

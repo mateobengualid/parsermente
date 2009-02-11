@@ -25,7 +25,7 @@ public class SAXParser
     {
         stack = new Stack<String>();
         xmlDocumentAttributes = new Attributes();
-        state = new PrologOrRootState(xmlDocumentAttributes);
+        state = new PrologOrRootState(xmlDocumentAttributes, handler);
         this.handler = handler;
     }
 
@@ -34,7 +34,7 @@ public class SAXParser
         BufferedReader br = new BufferedReader(sb);
         char[] c = new char[1];
         boolean eofReached = (-1 == br.read(c));
-       
+
         while (!eofReached)
         {
             // Here it should analyze and escape characters
@@ -51,12 +51,12 @@ public class SAXParser
                 if (threeCharString.equals("lt;"))
                 {
                     c[0] = '<';
-                    state = state.consumeCharacter(c[0], stack, true, handler);
+                    state = state.consumeCharacter(c[0], stack, true);
                 }
                 else if (threeCharString.equals("gt;"))
                 {
                     c[0] = '>';
-                    state = state.consumeCharacter(c[0], stack, true, handler);
+                    state = state.consumeCharacter(c[0], stack, true);
                 }
                 else if (threeCharString.equals("amp"))
                 {
@@ -68,7 +68,7 @@ public class SAXParser
                     if ((br.read(auxCharArray) != -1) && (auxCharArray[0] == ';'))
                     {
                         c[0] = '&';
-                        state = state.consumeCharacter(c[0], stack, true, handler);
+                        state = state.consumeCharacter(c[0], stack, true);
                     }
 
                 }
@@ -81,7 +81,7 @@ public class SAXParser
                     if ((br.read(auxCharArray) != -1) && (auxCharArray.toString().equals("t;")))
                     {
                         c[0] = '"';
-                        state = state.consumeCharacter(c[0], stack, true, handler);
+                        state = state.consumeCharacter(c[0], stack, true);
                     }
 
                 }
@@ -94,12 +94,12 @@ public class SAXParser
                     if ((br.read(auxCharArray) != -1) && (auxCharArray.toString().equals("s;")))
                     {
                         c[0] = '\'';
-                        state = state.consumeCharacter(c[0], stack, true, handler);
+                        state = state.consumeCharacter(c[0], stack, true);
                     }
 
                 }
             }
-            state = state.consumeCharacter(c[0], stack, false, handler);
+            state = state.consumeCharacter(c[0], stack, false);
             eofReached = (-1 == br.read(c));
         }
 
@@ -109,6 +109,8 @@ public class SAXParser
         }
         else
         {
+            // Aun si tuviera dtd, solo es necesario al momento de cerrar un elemento,
+            // no el documento.
             handler.endDocument();
         }
     }

@@ -19,13 +19,14 @@ public class ClosingElementState extends SAXParserState
 {
     private String elementName;
 
-    public ClosingElementState()
+    public ClosingElementState(SAXHandler userHandler)
     {
+        super(userHandler);
         elementName = "";
     }
 
     @Override
-    public SAXParserState consumeCharacter(char c, Stack<String> stack, boolean escaped, SAXHandler handler) throws SAXParserException
+    public SAXParserState consumeCharacter(char c, Stack<String> stack, boolean escaped) throws SAXParserException
     {
         if (c == '>')
         {
@@ -40,11 +41,11 @@ public class ClosingElementState extends SAXParserState
                     handler.endElement(stack.pop());
                     if (!stack.empty())
                     {
-                        return new InsideElementState();
+                        return new InsideElementState(handler);
                     }
                     else
                     {
-                        return new EpilogueWaitingForEndState();
+                        return new EpilogueWaitingForEndState(handler);
                     }
                 }
             }
@@ -55,7 +56,7 @@ public class ClosingElementState extends SAXParserState
         }
         else if (c == ' ')
         {
-            return new ClosingElementBlankTrailState(elementName);
+            return new ClosingElementBlankTrailState(elementName, handler);
         }
         else
         {

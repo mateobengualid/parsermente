@@ -4,6 +4,7 @@
  */
 package parsers.sax.states;
 
+import parsers.sax.states.doctype.LTSDState;
 import java.util.Stack;
 import parsers.sax.SAXHandler;
 import parsers.sax.SAXParserException;
@@ -17,24 +18,25 @@ public class FirstTagLTSState extends SAXParserState
 {
     private SAXParserState previousState;
 
-    public FirstTagLTSState(SAXParserState previousState)
+    public FirstTagLTSState(SAXParserState previousState, SAXHandler userHandler)
     {
+        super(userHandler);
         this.previousState = previousState;
     }
 
     @Override
-    public SAXParserState consumeCharacter(char c, Stack<String> stack, boolean escaped, SAXHandler handler) throws SAXParserException
+    public SAXParserState consumeCharacter(char c, Stack<String> stack, boolean escaped) throws SAXParserException
     {
-        // Is a <!E for <!ENTITY[]>
-        //if (c == '?')
-        //{
-        //    return new PrologNameState("",xmlDocumentAttributes);
-        //} else 
-        // Is a comment
+        // Is a <!D for <!DOCTYPE[]>
+        if (c == 'D')
+        {
+            return new LTSDState(handler);
+        }
+        else // Is a comment
         if (c == '-')
         {
             // TODO Agregar acá la consideración de que podría ser un ENTITY
-            return new LTSHState(previousState);
+            return new LTSHState(previousState, handler);
         }
         // Is the root element
         else

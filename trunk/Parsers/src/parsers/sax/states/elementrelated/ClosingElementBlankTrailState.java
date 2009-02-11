@@ -17,13 +17,14 @@ public class ClosingElementBlankTrailState extends SAXParserState
 {
     private String elementName;
 
-    public ClosingElementBlankTrailState(String elementName)
+    public ClosingElementBlankTrailState(String elementName, SAXHandler userHandler)
     {
+        super(userHandler);
         this.elementName = elementName;
     }
 
     @Override
-    public SAXParserState consumeCharacter(char c, Stack<String> stack, boolean escaped, SAXHandler handler) throws SAXParserException
+    public SAXParserState consumeCharacter(char c, Stack<String> stack, boolean escaped) throws SAXParserException
     {
         if (c == ' ')
         {
@@ -37,7 +38,7 @@ public class ClosingElementBlankTrailState extends SAXParserState
             }
             else
             {
-                return new InsideElementState();
+                return new InsideElementState(handler);
             }
         }
         else

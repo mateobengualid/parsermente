@@ -10,7 +10,7 @@ public class ReadingAttributeNameState extends DTDAttlistState
 {
     public ReadingAttributeNameState(DTDState previousState, char c)
     {
-        super((DTDAttlistState) previousState);
+        super((DTDAttlistState)previousState);
         attributeName = "" + c;
     }
 

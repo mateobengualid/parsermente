@@ -19,24 +19,25 @@ public class FirstTagLTState extends SAXParserState
 {
     private Attributes xmlDocumentAttributes;
 
-    public FirstTagLTState(Attributes xmlDocumentAttributes)
+    public FirstTagLTState(Attributes xmlDocumentAttributes, SAXHandler userHandler)
     {
+        super(userHandler);
         this.xmlDocumentAttributes = xmlDocumentAttributes;
     }
 
     @Override
-    public SAXParserState consumeCharacter(char c, Stack<String> stack, boolean escaped, SAXHandler handler) throws SAXParserException
+    public SAXParserState consumeCharacter(char c, Stack<String> stack, boolean escaped) throws SAXParserException
     {
         // Is a prolog element
         if (c == '?')
         {
-            return new PrologNameState("", xmlDocumentAttributes);
+            return new PrologNameState("", xmlDocumentAttributes, handler);
         }
         else // Is a comment or the so much feared <!ENTITY[FOO]>
         if (c == '!')
         {
             // TODO Agregar acá la consideración de que podría ser un ENTITY
-            return new FirstTagLTSState(new PrologOrRootState(xmlDocumentAttributes));
+            return new FirstTagLTSState(new PrologOrRootState(xmlDocumentAttributes, handler), handler);
         }
         // Is the root element
         else
@@ -45,7 +46,7 @@ public class FirstTagLTState extends SAXParserState
             // finally transfer control to 
 
 
-            return new ElementNameState("" + c);
+            return new ElementNameState("" + c, handler);
         }
     }
 

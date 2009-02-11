@@ -15,16 +15,17 @@ import parsers.sax.states.SAXParserState;
  */
 public class EpilogueLTSState extends SAXParserState
 {
-    public EpilogueLTSState()
+    public EpilogueLTSState(SAXHandler userHandler)
     {
+        super(userHandler);
     }
 
     @Override
-    public SAXParserState consumeCharacter(char c, Stack<String> stack, boolean escaped, SAXHandler handler) throws SAXParserException
+    public SAXParserState consumeCharacter(char c, Stack<String> stack, boolean escaped) throws SAXParserException
     {
         if (c == '-')
         {
-            return new EpilogueLTSHState();
+            return new EpilogueLTSHState(handler);
         }
         else
         {

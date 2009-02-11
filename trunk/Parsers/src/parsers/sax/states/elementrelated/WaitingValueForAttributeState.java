@@ -20,15 +20,16 @@ public class WaitingValueForAttributeState extends SAXParserState
     private String lastAttributeName;
     private Attributes attributes;
 
-    public WaitingValueForAttributeState(String name, String lastAttributeName, Attributes attributes)
+    public WaitingValueForAttributeState(String name, String lastAttributeName, Attributes attributes, SAXHandler userHandler)
     {
+        super(userHandler);
         this.name = name;
         this.lastAttributeName = lastAttributeName;
         this.attributes = attributes;
     }
 
     @Override
-    public SAXParserState consumeCharacter(char c, Stack<String> stack, boolean escaped, SAXHandler handler) throws SAXParserException
+    public SAXParserState consumeCharacter(char c, Stack<String> stack, boolean escaped) throws SAXParserException
     {
         if (!escaped)
         {
@@ -40,7 +41,7 @@ public class WaitingValueForAttributeState extends SAXParserState
             // Has arrived the tag
             else if ((c == '\'') || (c == '\"'))
             {
-                return new AttributeValueState(name, lastAttributeName, attributes, c);
+                return new AttributeValueState(name, lastAttributeName, attributes, c, handler);
             }
             else
             {

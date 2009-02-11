@@ -19,14 +19,15 @@ public class PrologNameState extends SAXParserState
     private String name;
     private Attributes attributes;
 
-    public PrologNameState(String name, Attributes attributes)
+    public PrologNameState(String name, Attributes attributes, SAXHandler userHandler)
     {
+        super(userHandler);
         this.name = name;
         this.attributes = attributes;
     }
 
     @Override
-    public SAXParserState consumeCharacter(char c, Stack<String> stack, boolean escaped, SAXHandler handler) throws SAXParserException
+    public SAXParserState consumeCharacter(char c, Stack<String> stack, boolean escaped) throws SAXParserException
     {
         // Si el caracter es escapado, insertarlo en el nombre, sino, procesarlo
         if (escaped)
@@ -41,7 +42,7 @@ public class PrologNameState extends SAXParserState
             {
                 if (name.equalsIgnoreCase("xml"))
                 {
-                    return new WaitingPrologAttributeState(name);
+                    return new WaitingPrologAttributeState(name, handler);
                 }
                 else
                 {

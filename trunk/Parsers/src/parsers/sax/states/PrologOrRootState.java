@@ -18,13 +18,14 @@ public class PrologOrRootState extends SAXParserState
     // linked this way is the safest possibility
     Attributes xmlDocumentAttributes;
 
-    public PrologOrRootState(Attributes xmlDocumentAttributes)
+    public PrologOrRootState(Attributes xmlDocumentAttributes, SAXHandler userHandler)
     {
+        super(userHandler);
         this.xmlDocumentAttributes = xmlDocumentAttributes;
     }
 
     @Override
-    public SAXParserState consumeCharacter(char c, Stack<String> stack, boolean escaped, SAXHandler handler) throws SAXParserException
+    public SAXParserState consumeCharacter(char c, Stack<String> stack, boolean escaped) throws SAXParserException
     {
         if (c == ' ')
         {
@@ -32,7 +33,7 @@ public class PrologOrRootState extends SAXParserState
         }
         else if (c == '<')
         {
-            return new FirstTagLTState(xmlDocumentAttributes);
+            return new FirstTagLTState(xmlDocumentAttributes, handler);
         }
         else if (c == '\n')
         {

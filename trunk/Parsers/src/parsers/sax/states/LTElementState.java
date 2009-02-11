@@ -22,28 +22,29 @@ public class LTElementState extends SAXParserState
     // it has to remember the previous state
     private SAXParserState previousState;
 
-    public LTElementState(SAXParserState previousState)
+    public LTElementState(SAXParserState previousState, SAXHandler userHandler)
     {
+        super(userHandler);
         this.previousState = previousState;
     }
 
     @Override
-    public SAXParserState consumeCharacter(char c, Stack<String> stack, boolean escaped, SAXHandler handler) throws SAXParserException
+    public SAXParserState consumeCharacter(char c, Stack<String> stack, boolean escaped) throws SAXParserException
     {
         // Es por comentario o un <![CDATA[]]>
         if (c == '!')
         {
-            return new LTSState(previousState);
+            return new LTSState(previousState, handler);
         }
         // Es por cierre de elemento
         else if (c == '/')
         {
-            return new ClosingElementState();
+            return new ClosingElementState(handler);
         }
         // TODO Si es letra o símbolo escapado
         else
         {
-            return new ElementNameState("" + c);
+            return new ElementNameState("" + c, handler);
         }
     }
 

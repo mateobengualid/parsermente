@@ -18,23 +18,24 @@ public class CDATARBState extends SAXParserState
 {
     private String CDATA;
 
-    public CDATARBState(String CDATA)
+    public CDATARBState(String CDATA, SAXHandler userHandler)
     {
+        super(userHandler);
         this.CDATA = CDATA;
     }
 
     @Override
-    public SAXParserState consumeCharacter(char c, Stack<String> stack, boolean escaped, SAXHandler handler) throws SAXParserException
+    public SAXParserState consumeCharacter(char c, Stack<String> stack, boolean escaped) throws SAXParserException
     {
         // Has formed "]]"
         if (c == ']')
         {
-            return new CDATARBRBState(CDATA);
+            return new CDATARBRBState(CDATA, handler);
         }
         // Has formed only "]"
         else
         {
-            return new InsideCDATAState(CDATA + ']' + c);
+            return new InsideCDATAState(CDATA + ']' + c, handler);
         }
     }
 

@@ -18,13 +18,13 @@ import parsers.sax.states.SAXParserState;
  */
 public class EpilogueWaitingForEndState extends SAXParserState
 {
-    public EpilogueWaitingForEndState()
+    public EpilogueWaitingForEndState(SAXHandler userHandler)
     {
-
+        super(userHandler);
     }
 
     @Override
-    public SAXParserState consumeCharacter(char c, Stack<String> stack, boolean escaped, SAXHandler handler) throws SAXParserException
+    public SAXParserState consumeCharacter(char c, Stack<String> stack, boolean escaped) throws SAXParserException
     {
         if (c == ' ' || c == '\n')
         {
@@ -32,7 +32,7 @@ public class EpilogueWaitingForEndState extends SAXParserState
         }
         else if (c == '<')
         {
-            return new EpilogueLTState();
+            return new EpilogueLTState(handler);
         }
         else
         {

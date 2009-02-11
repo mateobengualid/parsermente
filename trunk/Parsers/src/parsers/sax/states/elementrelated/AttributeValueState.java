@@ -22,8 +22,9 @@ public class AttributeValueState extends SAXParserState
     private Attributes attributes;
     private char enclosingChar;
 
-    public AttributeValueState(String name, String lastAttributeName, Attributes attributes, char enclosingChar)
+    public AttributeValueState(String name, String lastAttributeName, Attributes attributes, char enclosingChar, SAXHandler userHandler)
     {
+        super(userHandler);
         this.name = name;
         this.lastAttributeName = lastAttributeName;
         this.lastAttributeValue = "";
@@ -32,17 +33,17 @@ public class AttributeValueState extends SAXParserState
     }
 
     @Override
-    public SAXParserState consumeCharacter(char c, Stack<String> stack, boolean escaped, SAXHandler handler) throws SAXParserException
+    public SAXParserState consumeCharacter(char c, Stack<String> stack, boolean escaped) throws SAXParserException
     {
         // TODO: Esto es pedido por las reglas de well-formedness, pero no es util.
-        /*if (c == '<')
+        if (c == '<')
         {
-        throw new SAXParserException("'<' can't be inside the value of an attribute");
+            throw new SAXParserException("'<' can't be inside the value of an attribute");
         }
-        else*/ if (c == enclosingChar)
+        else if (c == enclosingChar)
         {
             attributes.insertAttribute(lastAttributeName, lastAttributeValue);
-            return new WaitingAttributeState(name, attributes);
+            return new WaitingAttributeState(name, attributes, handler);
         }
         else
         {

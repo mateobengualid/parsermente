@@ -19,10 +19,17 @@ import parsers.sax.SAXHandler;
 // </editor-fold> 
 public abstract class SAXParserState
 {
+    protected SAXHandler handler;
+
+    public SAXParserState(SAXHandler userHandler)
+    {
+        this.handler = userHandler;
+    }
+    
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.1696EE42-A8BF-2966-BB69-5BE67589CCE9]
     // </editor-fold> 
-    public abstract SAXParserState consumeCharacter(char c, Stack<String> stack, boolean escaped, SAXHandler handler) throws parsers.sax.SAXParserException;
+    public abstract SAXParserState consumeCharacter(char c, Stack<String> stack, boolean escaped) throws parsers.sax.SAXParserException;
 
     public abstract boolean canEscape();
     

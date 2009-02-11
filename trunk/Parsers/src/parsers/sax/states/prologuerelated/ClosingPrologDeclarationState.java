@@ -21,27 +21,29 @@ public class ClosingPrologDeclarationState extends SAXParserState
     private String elementName;
     private Attributes attributes;
 
-    public ClosingPrologDeclarationState()
+    public ClosingPrologDeclarationState(SAXHandler userHandler)
     {
+        super(userHandler);
         elementName = "";
     }
 
-    ClosingPrologDeclarationState(String name, Attributes attributes)
+    public ClosingPrologDeclarationState(String name, Attributes attributes, SAXHandler userHandler)
     {
+        super(userHandler);
         this.elementName = name;
         this.attributes = attributes;
     }
 
     @Override
-    public SAXParserState consumeCharacter(char c, Stack<String> stack, boolean escaped, SAXHandler handler) throws SAXParserException
+    public SAXParserState consumeCharacter(char c, Stack<String> stack, boolean escaped) throws SAXParserException
     {
         if (c == '>')
         {
             // Check the prolog data, that is: version, standalone and encoding.
             ClosingPrologDeclarationState.checkForCorrectPrologue(attributes);
             handler.startDocument(attributes);
-            
-            return new PrologOrRootState(attributes);
+
+            return new PrologOrRootState(attributes, handler);
         }
         else
         {

@@ -21,30 +21,32 @@ public class PrologAttributeNameState extends SAXParserState
     private String lastAttributeName;
     private Attributes attributes;
 
-    public PrologAttributeNameState(String name, Attributes attributes)
+    public PrologAttributeNameState(String name, Attributes attributes, SAXHandler userHandler)
     {
+        super(userHandler);
         this.lastAttributeName = name;
         this.attributes = attributes;
     }
 
-    public PrologAttributeNameState(String name, String lastAttributeName, Attributes attributes)
+    public PrologAttributeNameState(String name, String lastAttributeName, Attributes attributes, SAXHandler userHandler)
     {
+        super(userHandler);
         this.name = name;
         this.lastAttributeName = lastAttributeName;
         this.attributes = attributes;
     }
 
     @Override
-    public SAXParserState consumeCharacter(char c, Stack<String> stack, boolean escaped, SAXHandler handler) throws SAXParserException
+    public SAXParserState consumeCharacter(char c, Stack<String> stack, boolean escaped) throws SAXParserException
     {
         // Si se acabo el nombre al llegar un blanco
         if (c == ' ')
         {
-            return new WaitingEqualForPrologAttributeState(name, lastAttributeName, attributes);
+            return new WaitingEqualForPrologAttributeState(name, lastAttributeName, attributes, handler);
         }
         else if (c == '=')
         {
-            return new WaitingValueForPrologAttributeState(name, lastAttributeName, attributes);
+            return new WaitingValueForPrologAttributeState(name, lastAttributeName, attributes, handler);
         }
         else
         {

@@ -17,17 +17,18 @@ public class InsideCDATAState extends SAXParserState
 {
     private String CDATA;
 
-    public InsideCDATAState(String CDATA)
+    public InsideCDATAState(String CDATA, SAXHandler userHandler)
     {
+        super(userHandler);
         this.CDATA = CDATA;
     }
 
     @Override
-    public SAXParserState consumeCharacter(char c, Stack<String> stack, boolean escaped, SAXHandler handler) throws SAXParserException
+    public SAXParserState consumeCharacter(char c, Stack<String> stack, boolean escaped) throws SAXParserException
     {
         if (c == ']')
         {
-            return new CDATARBState(CDATA);
+            return new CDATARBState(CDATA, handler);
         }
         else
         {

@@ -4,8 +4,6 @@
  */
 package parsers.dtd.model;
 
-import parsers.dtd.model.DTDModel;
-
 /**
  *
  * @author mateo
@@ -13,12 +11,15 @@ import parsers.dtd.model.DTDModel;
 public abstract class DTDState
 {
     private DTDModel model;
-    
+
     public DTDState(DTDState previousState)
     {
-        this.model = previousState.getModel();
+        if (previousState != null)
+        {
+            this.model = previousState.getModel();
+        }
     }
-    
+
     public abstract DTDState consumeCharacter(char c);
 
     public DTDModel getModel()
