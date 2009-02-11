@@ -24,6 +24,13 @@ import parsers.sax.SAXParser;
 // </editor-fold> 
 public class DOMParser 
 {
+    private boolean preserveWhitespace;
+    
+    public DOMParser(boolean preserveWhitespace)
+    {
+        this.preserveWhitespace = preserveWhitespace;
+    }
+    
     // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
     // #[regen=yes,id=DCE.63068A48-CD21-2EDF-2000-A26B2B73BDB1]
     // </editor-fold> 
@@ -34,11 +41,14 @@ public class DOMParser
         try 
         {
             InputStreamReader sb = null;
-
             sb = new FileReader(archivo);
-            SAXParser parser = new SAXParser(new DOMParserSAXHandler(doc));
-            parser.parse(sb);         
-        } 
+            
+            DOMParserSAXHandler domParserSAXHandler = new DOMParserSAXHandler(doc);
+            domParserSAXHandler.setPreserveWhitespace(this.preserveWhitespace);
+            
+            SAXParser saxParser = new SAXParser(domParserSAXHandler);
+            saxParser.parse(sb);         
+        }
         catch (IOException ex) 
         {
             Logger.getLogger(DOMParser.class.getName()).log(Level.SEVERE, null, ex);

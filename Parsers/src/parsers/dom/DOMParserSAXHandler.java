@@ -27,8 +27,7 @@ public class DOMParserSAXHandler extends SAXHandler
 
     public DOMParserSAXHandler(Document doc) 
     {
-        this.stackDOM = new Stack<Node>();        
-        this.preserveWhitespace = false;        
+        this.stackDOM = new Stack<Node>();              
         this.doc = doc;        
     }        
     
