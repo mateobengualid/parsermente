@@ -35,7 +35,7 @@ public class InsideElementState extends SAXParserState
         }
         else
         {
-            throw new SAXParserException("Error inside " + stack.pop() + " for " + c);
+            throw new SAXParserException("Error inside the element '" + stack.pop() + "' due to character '" + c + "'.");
         }
     }
 
