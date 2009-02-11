@@ -15,7 +15,6 @@ import parsers.sax.SAXHandler;
 
 /**
  *  @author Mateo
- *     TODO Reemplazar DefaultHandler por SAXHandler
  */
 // <editor-fold defaultstate="collapsed" desc=" UML Marker "> 
 // #[regen=yes,id=DCE.E367C4B2-BAC8-BDBC-0565-0613BE8B7BA8]
