@@ -2,15 +2,16 @@ package parsers.dtd.attlist;
 
 import parsers.dtd.model.DTDState;
 import parsers.*;
+import parsers.dtd.model.DTDAttlistState;
 
 /**
  * Esperando por el tipo del atributo.
  */
-public class WaitingForAttributeTypeState extends DTDState
+public class WaitingForAttributeTypeState extends DTDAttlistState
 {
     public WaitingForAttributeTypeState(DTDState previousState, char c)
     {
-        super(previousState);
+        super((DTDAttlistState) previousState);
     }
 
     @Override

@@ -17,13 +17,14 @@ public class TextElementState extends SAXParserState
 {
     private String text;
 
-    public TextElementState(char c)
+    public TextElementState(char c, SAXHandler userHandler)
     {
+        super(userHandler);
         this.text = "" + c;
     }
 
     @Override
-    public SAXParserState consumeCharacter(char c, Stack<String> stack, boolean escaped, SAXHandler handler) throws SAXParserException
+    public SAXParserState consumeCharacter(char c, Stack<String> stack, boolean escaped) throws SAXParserException
     {
         if (escaped)
         {
@@ -32,10 +33,10 @@ public class TextElementState extends SAXParserState
         }
         else
         {
-            if (c == '<')            
+            if (c == '<')
             {
-                handler.characters(text,false);
-                return new LTElementState(new InsideElementState());
+                handler.characters(text, false);
+                return new LTElementState(new InsideElementState(handler), handler);
             }
             else if ((c != '&') && (c != '\'') && (c != '\"') && (c != '>'))
             {
@@ -57,8 +58,7 @@ public class TextElementState extends SAXParserState
     }
 
     @Override
-    public
-    boolean canFinalize()
+    public boolean canFinalize()
     {
         return false;
     }

@@ -10,9 +10,10 @@ public class ReadingAttElementNameState extends DTDAttlistState
 {
     public ReadingAttElementNameState(DTDState previousState, char c)
     {
-        // There is no previous state, so null is provided..
-        super(null);
-        this.attributeName = "" + c;
+        // There is no previous state as DTDAttlistState, so
+        // only the model gets copied.
+        super(previousState);
+        this.elementName = "" + c;
     }
 
     @Override
@@ -35,6 +36,6 @@ public class ReadingAttElementNameState extends DTDAttlistState
 
     private void readAnotherAttElementNameChar(char c)
     {
-        this.attributeName += c;
+        this.elementName += c;
     }
 }

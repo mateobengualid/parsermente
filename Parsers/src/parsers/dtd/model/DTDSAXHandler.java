@@ -5,7 +5,6 @@
 package parsers.dtd.model;
 
 import java.util.ArrayList;
-import java.util.Hashtable;
 import java.util.Stack;
 import parsers.sax.Attributes;
 import parsers.sax.SAXHandler;
@@ -29,6 +28,20 @@ public class DTDSAXHandler extends SAXHandler
     @Override
     public void startElement(String name, Attributes atts)
     {
+        if (childrenCount == null)
+        {
+            // Es el elemento raiz, chequear igualdad de nombres.
+            if(!name.equals(this.model.getRootName()))
+            {
+                throw new DTDValidatorException("The DTD name and the root element don't match.");
+            }
+
+            // Agregar a la pila un conjunto nuevo de conteo para la raiz.
+            childrenCount = new Stack<ElementChecklist>();
+            ElementChecklist childrenCheckList = new ElementChecklist();
+            childrenCount.push(childrenCheckList);
+        }
+
         // Save the previousCount of attributes to check that no one was ommited or added.
         int howManyAttributes = atts.getLength();
         int attributesConstraintsSize = 0;
@@ -71,7 +84,7 @@ public class DTDSAXHandler extends SAXHandler
                     if (attributeConstraint.isFixed() && (attributeDefault.compareTo(attributeValue) != 0))
                     {
                         // Si el valor de FIXED ha cambiado, es un error.
-                        throw new DTDValidatorException("Expected " + attributeDefault + " but found " + attributeValue + " for Attribute " + attributeName + " doesn't exist at element " + name + ".");
+                        throw new DTDValidatorException("Expected " + attributeDefault + " but found " + attributeValue + " for attribute " + attributeName + " at element " + name + ".");
                     }
                 }
             }
@@ -106,7 +119,7 @@ public class DTDSAXHandler extends SAXHandler
     @Override
     public void characters(String chars, boolean isCDATA)
     {
-        childrenCount.peek().setCdata(isCDATA);
+        childrenCount.peek().setCdata(true);
         userSAXHandler.characters(chars, isCDATA);
     }
 
@@ -118,7 +131,7 @@ public class DTDSAXHandler extends SAXHandler
         {
             throw new DTDValidatorException("A validation problem has arised in the content of element " + name + ".");
         }
-        
+
         userSAXHandler.endElement(name);
     }
 

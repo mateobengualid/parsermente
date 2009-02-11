@@ -20,15 +20,16 @@ public class WaitingEqualForPrologAttributeState extends SAXParserState
     private String lastAttributeName;
     private Attributes attributes;
 
-    public WaitingEqualForPrologAttributeState(String name, String lastAttributeName, Attributes attributes)
+    public WaitingEqualForPrologAttributeState(String name, String lastAttributeName, Attributes attributes, SAXHandler userHandler)
     {
+        super(userHandler);
         this.name = name;
         this.lastAttributeName = lastAttributeName;
         this.attributes = attributes;
     }
 
     @Override
-    public SAXParserState consumeCharacter(char c, Stack<String> stack, boolean escaped, SAXHandler handler) throws SAXParserException
+    public SAXParserState consumeCharacter(char c, Stack<String> stack, boolean escaped) throws SAXParserException
     {
         if (c == ' ')
         {
@@ -36,7 +37,7 @@ public class WaitingEqualForPrologAttributeState extends SAXParserState
         }
         else if (c == '=')
         {
-            return new WaitingValueForPrologAttributeState(name, lastAttributeName, attributes);
+            return new WaitingValueForPrologAttributeState(name, lastAttributeName, attributes, handler);
         }
         else
         {

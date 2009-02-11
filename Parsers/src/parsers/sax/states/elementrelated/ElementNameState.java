@@ -18,13 +18,14 @@ public class ElementNameState extends SAXParserState
 {
     private String name;
 
-    public ElementNameState(String name)
+    public ElementNameState(String name, SAXHandler userHandler)
     {
+        super(userHandler);
         this.name = name;
     }
 
     @Override
-    public SAXParserState consumeCharacter(char c, Stack<String> stack, boolean escaped, SAXHandler handler) throws SAXParserException
+    public SAXParserState consumeCharacter(char c, Stack<String> stack, boolean escaped) throws SAXParserException
     {
         // Si el caracter es escapado, insertarlo en el nombre, sino, procesarlo
         if (escaped)
@@ -37,7 +38,7 @@ public class ElementNameState extends SAXParserState
             // Si se termino el nombre, comenzar el procesamiento de los atributos            
             if (c == ' ')
             {
-                return new WaitingAttributeState(name);
+                return new WaitingAttributeState(name, handler);
             }
             // TODO Crear una funcion que incorpore el dominio para nombres
             else if (Character.isLetterOrDigit(c))
@@ -48,14 +49,14 @@ public class ElementNameState extends SAXParserState
             // Si encuentra un '/'
             else if (c == '/')
             {
-                return new EmptyElementWaitingForGTState(name, new Attributes());
+                return new EmptyElementWaitingForGTState(name, new Attributes(), handler);
             }
             // Si encuentra un '>'
             else if (c == '>')
             {
                 handler.startElement(name, new Attributes());
                 stack.push(name);
-                return new InsideElementState();
+                return new InsideElementState(handler);
             }
             else
             {

@@ -14,15 +14,23 @@ import java.util.Hashtable;
  */
 public class DTDModel
 {
-    private Hashtable<String, AndExpression> childConstraints;
+    private String rootName;
+    private Hashtable<String, BooleanExpression> childConstraints;
     private Hashtable<String, ArrayList<AttributeConstraint>> attributesConstraints;
 
-    public Hashtable<String, AndExpression> getChildConstraints()
+    public DTDModel()
+    {
+        rootName = "";
+        childConstraints = new Hashtable<String, BooleanExpression>();
+        attributesConstraints = new Hashtable<String, ArrayList<AttributeConstraint>>();
+    }
+
+    public Hashtable<String, BooleanExpression> getChildConstraints()
     {
         return childConstraints;
     }
 
-    public void setChildConstraints(Hashtable<String, AndExpression> childConstraints)
+    public void setChildConstraints(Hashtable<String, BooleanExpression> childConstraints)
     {
         this.childConstraints = childConstraints;
     }
@@ -35,5 +43,15 @@ public class DTDModel
     public void setAttributesConstraints(Hashtable<String, ArrayList<AttributeConstraint>> attributesConstraints)
     {
         this.attributesConstraints = attributesConstraints;
+    }
+
+    public String getRootName()
+    {
+        return rootName;
+    }
+
+    public void setRootName(String rootName)
+    {
+        this.rootName = rootName;
     }
 }

@@ -19,23 +19,24 @@ public class LTSState extends SAXParserState
 {
     private SAXParserState previousState;
 
-    public LTSState(SAXParserState previousState)
+    public LTSState(SAXParserState previousState, SAXHandler userHandler)
     {
+        super(userHandler);
         this.previousState = previousState;
     }
 
     @Override
-    public SAXParserState consumeCharacter(char c, Stack<String> stack, boolean escaped, SAXHandler handler) throws SAXParserException
+    public SAXParserState consumeCharacter(char c, Stack<String> stack, boolean escaped) throws SAXParserException
     {
         // Es por un <!- de comentario
         if (c == '-')
         {
-            return new LTSHState(previousState);
+            return new LTSHState(previousState, handler);
         }
         // Es por un <![ de un CDATA
         else if (c == '[')
         {
-            return new LTSLBState();
+            return new LTSLBState(handler);
         }
         else
         {

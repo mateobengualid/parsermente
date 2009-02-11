@@ -4,8 +4,6 @@
  */
 package parsers.dtd.model;
 
-import java.util.Hashtable;
-
 /**
  *
  * @author mateo

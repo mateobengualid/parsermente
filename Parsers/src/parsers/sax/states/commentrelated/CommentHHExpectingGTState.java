@@ -18,13 +18,14 @@ public class CommentHHExpectingGTState extends SAXParserState
 {
     private SAXParserState previousState;
 
-    public CommentHHExpectingGTState(SAXParserState previousState)
+    public CommentHHExpectingGTState(SAXParserState previousState, SAXHandler userHandler)
     {
+        super(userHandler);
         this.previousState = previousState;
     }
 
     @Override
-    public SAXParserState consumeCharacter(char c, Stack<String> stack, boolean escaped, SAXHandler handler) throws SAXParserException
+    public SAXParserState consumeCharacter(char c, Stack<String> stack, boolean escaped) throws SAXParserException
     {
         // No puede ser otra mas que "-" o "-->"
         if (c != '>')

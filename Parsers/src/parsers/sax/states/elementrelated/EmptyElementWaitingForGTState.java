@@ -19,20 +19,21 @@ public class EmptyElementWaitingForGTState extends SAXParserState
     private String name;
     private Attributes attributes;
 
-    public EmptyElementWaitingForGTState(String name, Attributes attributes)
+    public EmptyElementWaitingForGTState(String name, Attributes attributes, SAXHandler userHandler)
     {
+        super(userHandler);
         this.name = name;
         this.attributes = attributes;
     }
 
     @Override
-    public SAXParserState consumeCharacter(char c, Stack<String> stack, boolean escaped, SAXHandler handler) throws SAXParserException
+    public SAXParserState consumeCharacter(char c, Stack<String> stack, boolean escaped) throws SAXParserException
     {
         if (c == '>')
         {
             handler.startElement(name, attributes);
             handler.endElement(name);
-            return new InsideElementState();
+            return new InsideElementState(handler);
         }
         else
         {

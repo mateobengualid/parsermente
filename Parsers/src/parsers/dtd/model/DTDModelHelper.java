@@ -6,6 +6,7 @@ package parsers.dtd.model;
 
 import parsers.dtd.start.BeginningSpaceTrailState;
 import java.io.IOException;
+import java.io.Reader;
 
 /**
  *
@@ -13,23 +14,23 @@ import java.io.IOException;
  */
 public class DTDModelHelper
 {
-    public DTDModel obtainModel(java.io.InputStream inputStream, int charsToBeRead) throws IOException
+    public DTDModel obtainModel(Reader inputStream, int charsToBeRead) throws IOException
     {
         DTDModel model = new DTDModel();
         DTDState actualState = new BeginningSpaceTrailState(null, ' ');
-        
-        inputStream.reset();
+        actualState.setModel(model);
 
         for (int i = 0; i < charsToBeRead; i++)
         {
-            actualState = actualState.consumeCharacter((char)inputStream.read());
+            char c = (char) inputStream.read();
+            actualState = actualState.consumeCharacter(c);
         }
-        
+
         if (!(actualState instanceof BeginningSpaceTrailState))
         {
-            throw new DTDValidatorException("The documento is not in DTD format.");
+            throw new DTDValidatorException("The document is not in DTD format.");
         }
-        
+
         return model;
     }
 }
