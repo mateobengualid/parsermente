@@ -9,6 +9,7 @@ import parsers.sax.Attributes;
 import parsers.sax.SAXHandler;
 import parsers.sax.SAXParserException;
 import parsers.sax.states.elementrelated.ElementNameState;
+import parsers.sax.states.prologuerelated.ClosingPrologDeclarationState;
 import parsers.sax.states.prologuerelated.PrologNameState;
 
 /**
@@ -33,7 +34,7 @@ public class FirstTagLTState extends SAXParserState
         {
             return new PrologNameState("", xmlDocumentAttributes, handler);
         }
-        else // Is a comment or the so much feared <!ENTITY[FOO]>
+        else // Is a comment or the so much feared <!DOCTYPE[FOO]>
         if (c == '!')
         {
             // TODO Agregar acá la consideración de que podría ser un ENTITY
@@ -42,10 +43,15 @@ public class FirstTagLTState extends SAXParserState
         // Is the root element
         else
         {
-            // Here will check for prolog attributes, for well-formedness, and
-            // finally transfer control to 
-
-
+            // The xml document starts.
+            // If none <?xml ?> was used, supply a default one.
+            if((xmlDocumentAttributes == null) || (xmlDocumentAttributes.getLength() == 0))
+            {
+                xmlDocumentAttributes = new Attributes();
+                ClosingPrologDeclarationState.checkForCorrectPrologue(xmlDocumentAttributes);                                
+                handler.startDocument(xmlDocumentAttributes);
+            }
+            
             return new ElementNameState("" + c, handler);
         }
     }

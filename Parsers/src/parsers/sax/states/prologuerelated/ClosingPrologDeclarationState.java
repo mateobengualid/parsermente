@@ -63,7 +63,7 @@ public class ClosingPrologDeclarationState extends SAXParserState
         return false;
     }
 
-    private static void checkForCorrectPrologue(Attributes xmlAttributes)
+    public static void checkForCorrectPrologue(Attributes xmlAttributes)
     {
         String attValue;
 
