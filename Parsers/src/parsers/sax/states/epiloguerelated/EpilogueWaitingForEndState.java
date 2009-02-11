@@ -26,7 +26,7 @@ public class EpilogueWaitingForEndState extends SAXParserState
     @Override
     public SAXParserState consumeCharacter(char c, Stack<String> stack, boolean escaped) throws SAXParserException
     {
-        if (c == ' ' || c == '\n')
+        if ((c == ' ') || (c == '\n') || (c == '\r'))
         {
             return this;
         }

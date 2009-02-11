@@ -21,7 +21,7 @@ public class WaitingForAttributeTypeState extends DTDAttlistState
         {
             return this;
         }
-        else if (c == '\n')
+        else if ((c == '\n') || (c == '\r'))
         {
             return this;
         }

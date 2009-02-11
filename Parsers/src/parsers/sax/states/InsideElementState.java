@@ -28,7 +28,7 @@ public class InsideElementState extends SAXParserState
         {
             return new LTElementState(this, handler);
         }
-        else if (Character.isLetterOrDigit(c) || (c == ' ') || (c == '\n'))
+        else if (Character.isLetterOrDigit(c) || (c == ' ') || ((c == '\n') || (c == '\r')))
         {
             // Es un bloque de texto dentro de 
             return new TextElementState(c, handler);

@@ -40,8 +40,9 @@ public class ElementNameState extends SAXParserState
             {
                 return new WaitingAttributeState(name, handler);
             }
-            // TODO Crear una funcion que incorpore el dominio para nombres
-            else if (Character.isLetterOrDigit(c))
+            // TODO Crear una funcion que incorpore el dominio para nombres.
+            // No se implementa, considera los namespaces como nombres de elemento.
+            else if ((Character.isLetterOrDigit(c)) || (c == ':'))
             {
                 name += c;
                 return this;

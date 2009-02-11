@@ -32,7 +32,7 @@ public class DOCTYPEWaitingBracketOrSystemState extends SAXParserState
         {
             return this;
         }
-        else if (c == '\n')
+        else if ((c == '\n') || (c == '\r'))
         {
             return this;
         }
