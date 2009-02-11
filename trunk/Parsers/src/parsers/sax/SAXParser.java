@@ -46,7 +46,7 @@ public class SAXParser
                 // o "&gt;"
                 char[] auxCharArray = new char[3];
                 br.read(auxCharArray);
-                String threeCharString = auxCharArray.toString();
+                String threeCharString = "" + auxCharArray[0] + auxCharArray[1] + auxCharArray[2];
 
                 if (threeCharString.equals("lt;"))
                 {
@@ -63,7 +63,6 @@ public class SAXParser
                     // Debo leer el siguiente caracter para saber si conforma
                     // con "&amp;"                    
                     auxCharArray = new char[1];
-                    br.read(auxCharArray);
 
                     if ((br.read(auxCharArray) != -1) && (auxCharArray[0] == ';'))
                     {
@@ -78,7 +77,7 @@ public class SAXParser
                     // con "&quot;"
                     auxCharArray = new char[2];
 
-                    if ((br.read(auxCharArray) != -1) && (auxCharArray.toString().equals("t;")))
+                    if ((br.read(auxCharArray) != -1) && (("" + auxCharArray[0] + auxCharArray[1]).equals("t;")))
                     {
                         c[0] = '"';
                         state = state.consumeCharacter(c[0], stack, true);
@@ -91,7 +90,7 @@ public class SAXParser
                     // con "&apos;"
                     auxCharArray = new char[2];
 
-                    if ((br.read(auxCharArray) != -1) && (auxCharArray.toString().equals("s;")))
+                    if ((br.read(auxCharArray) != -1) && (("" + auxCharArray[0] + auxCharArray[1]).equals("s;")))
                     {
                         c[0] = '\'';
                         state = state.consumeCharacter(c[0], stack, true);
@@ -99,7 +98,11 @@ public class SAXParser
 
                 }
             }
-            state = state.consumeCharacter(c[0], stack, false);
+            else
+            {
+                // If no built-in entity was called.
+                state = state.consumeCharacter(c[0], stack, false);
+            }
             eofReached = (-1 == br.read(c));
         }
 
