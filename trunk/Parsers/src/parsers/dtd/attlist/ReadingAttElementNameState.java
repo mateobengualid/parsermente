@@ -23,7 +23,7 @@ public class ReadingAttElementNameState extends DTDAttlistState
         {
             return new WaitingForAttNameState(this, c);
         }
-        else if (c == '\n')
+        else if ((c == '\n') || (c == '\r'))
         {
             return new WaitingForAttNameState(this, c);
         }

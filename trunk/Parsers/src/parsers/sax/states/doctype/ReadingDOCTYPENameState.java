@@ -32,7 +32,7 @@ public class ReadingDOCTYPENameState extends SAXParserState
         {
             return new DOCTYPEWaitingBracketOrSystemState(doctypeName, handler);
         }
-        else if (c == '\n')
+        else if ((c == '\n') || (c == '\r'))
         {
             return new DOCTYPEWaitingBracketOrSystemState(doctypeName, handler);
         }

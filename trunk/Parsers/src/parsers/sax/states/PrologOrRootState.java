@@ -35,7 +35,7 @@ public class PrologOrRootState extends SAXParserState
         {
             return new FirstTagLTState(xmlDocumentAttributes, handler);
         }
-        else if (c == '\n')
+        else if ((c == '\n') || (c == '\r'))
         {
             return this;
         }

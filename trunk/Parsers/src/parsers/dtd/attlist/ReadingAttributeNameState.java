@@ -21,7 +21,7 @@ public class ReadingAttributeNameState extends DTDAttlistState
         {
             return new WaitingForAttributeTypeState(this, c);
         }
-        else if (c == '\n')
+        else if ((c == '\n') || (c == '\r'))
         {
             return new WaitingForAttributeTypeState(this, c);
         }

@@ -32,7 +32,7 @@ public class DOCTYPESYSTEMState extends SAXParserState
         {
             return new DOCTYPEWaitingFileNameState(doctypeName, handler);
         }
-        else if (c == '\n')
+        else if ((c == '\n') || (c == '\r'))
         {
             return new DOCTYPEWaitingFileNameState(doctypeName, handler);
         }

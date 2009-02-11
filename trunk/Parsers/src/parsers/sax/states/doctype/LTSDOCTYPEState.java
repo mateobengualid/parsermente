@@ -29,7 +29,7 @@ public class LTSDOCTYPEState extends SAXParserState
         {
             return new DOCTYPEWaitingNameState(handler);
         }
-        else if (c == '\n')
+        else if ((c == '\n') || (c == '\r'))
         {
             return new DOCTYPEWaitingNameState(handler);
         }

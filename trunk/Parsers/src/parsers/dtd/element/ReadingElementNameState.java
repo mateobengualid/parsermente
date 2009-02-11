@@ -23,7 +23,7 @@ public class ReadingElementNameState extends DTDState
         {
             return new WaitingForCategoryOrContentState(this, c);
         }
-        else if (c == '\n')
+        else if ((c == '\n') || (c == '\r'))
         {
             return new WaitingForCategoryOrContentState(this, c);
         }
