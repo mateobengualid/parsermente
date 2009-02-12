@@ -133,7 +133,7 @@ public class frmMain extends javax.swing.JFrame
             while(iterator.hasMoreElements())
             {                
                 iterator.next();
-                textArea.append(iterator.getCurrentElement().toString() + newline);                        
+                textArea.append(iterator.getCurrentElement().getName() + newline);                        
             }
             
             textArea.append(newline + "Success...");        
