@@ -37,7 +37,7 @@ public class WaitingAttributeState extends SAXParserState
     public SAXParserState consumeCharacter(char c, Stack<String> stack, boolean escaped) throws SAXParserException
     {
         // Si todavia no llega el nombre o el fin de etiqueta
-        if ((c == ' ') || ( c == '\t'))
+        if ((c == ' ') || (c == '\t') || (c == '\n') || (c == '\r'))
         {
             return this;
         }
