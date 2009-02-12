@@ -16,7 +16,7 @@ super(previousState);
 @Override
 public DTDState consumeCharacter(char c)
 {
-if(c == ' ')
+if((c == ' ') || ( c == '\t'))
 {
 return this;
 }

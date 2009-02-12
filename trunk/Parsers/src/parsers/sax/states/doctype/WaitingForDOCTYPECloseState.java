@@ -24,7 +24,7 @@ public class WaitingForDOCTYPECloseState extends SAXParserState
     public SAXParserState consumeCharacter(char c, Stack<String> stack, boolean escaped) throws SAXParserException
     {
         // Stop reading and parse the DTD chain.
-        if (c == ' ')
+        if ((c == ' ') || ( c == '\t'))
         {
             return this;
         }

@@ -34,7 +34,7 @@ public class WaitingValueForAttributeState extends SAXParserState
         if (!escaped)
         {
             // Still haven't arrived the value
-            if (c == ' ')
+            if ((c == ' ') || ( c == '\t'))
             {
                 return this;
             }

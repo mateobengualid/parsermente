@@ -54,7 +54,7 @@ public class ClosingElementState extends SAXParserState
                 throw new SAXParserException("More than one root element");
             }
         }
-        else if (c == ' ')
+        else if ((c == ' ') || ( c == '\t'))
         {
             return new ClosingElementBlankTrailState(elementName, handler);
         }

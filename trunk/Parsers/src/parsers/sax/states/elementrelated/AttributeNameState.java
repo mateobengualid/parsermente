@@ -40,7 +40,7 @@ public class AttributeNameState extends SAXParserState
     public SAXParserState consumeCharacter(char c, Stack<String> stack, boolean escaped) throws SAXParserException
     {
         // Si se acabo el nombre al llegar un blanco
-        if (c == ' ')
+        if ((c == ' ') || ( c == '\t'))
         {
             return new WaitingEqualForAttributeState(name, lastAttributeName, attributes, handler);
         }

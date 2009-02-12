@@ -16,7 +16,7 @@ public class BeginningSpaceTrailState extends DTDState
     @Override
     public DTDState consumeCharacter(char c)
     {
-        if (c == ' ')
+        if ((c == ' ') || ( c == '\t'))
         {
             return this;
         }
