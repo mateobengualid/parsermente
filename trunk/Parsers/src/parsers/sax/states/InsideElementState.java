@@ -24,18 +24,14 @@ public class InsideElementState extends SAXParserState
     public SAXParserState consumeCharacter(char c, Stack<String> stack, boolean escaped) throws SAXParserException
     {
         // Expect to find a comment, text, CDATA, or a new element
-        if (c == '<')
+        if ((c == '<') && (!escaped))
         {
             return new LTElementState(this, handler);
         }
-        else if (Character.isLetterOrDigit(c) || (c == ' ') || ((c == '\n') || (c == '\r')))
+        else
         {
             // Es un bloque de texto dentro de 
             return new TextElementState(c, handler);
-        }
-        else
-        {
-            throw new SAXParserException("Error inside the element '" + stack.pop() + "' due to character '" + c + "'.");
         }
     }
 
