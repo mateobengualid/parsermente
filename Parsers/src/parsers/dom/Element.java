@@ -13,9 +13,7 @@ import parsers.sax.Attributes;
  */
 public class Element extends Node
 {
-    private Attributes attributes;
-
-    
+    private Attributes attributes;   
     
     public Attributes getAttributes() 
     {
@@ -25,5 +23,5 @@ public class Element extends Node
     public void setAttributes(Attributes attributes) 
     {
         this.attributes = attributes;
-    }
+    }      
 }
