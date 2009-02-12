@@ -69,7 +69,10 @@ public class SAXParser
                         c[0] = '&';
                         state = state.consumeCharacter(c[0], stack, true);
                     }
-
+                    else
+                    {
+                        throw new SAXParserException("Invalid entity.");
+                    }
                 }
                 else if (threeCharString.equals("quo"))
                 {
@@ -82,7 +85,10 @@ public class SAXParser
                         c[0] = '"';
                         state = state.consumeCharacter(c[0], stack, true);
                     }
-
+                    else
+                    {
+                        throw new SAXParserException("Invalid entity.");
+                    }
                 }
                 else if (threeCharString.equals("apo"))
                 {
@@ -95,7 +101,14 @@ public class SAXParser
                         c[0] = '\'';
                         state = state.consumeCharacter(c[0], stack, true);
                     }
-
+                    else
+                    {
+                        throw new SAXParserException("Invalid entity.");
+                    }
+                }
+                else
+                {
+                    throw new SAXParserException("Invalid entity.");
                 }
             }
             else
