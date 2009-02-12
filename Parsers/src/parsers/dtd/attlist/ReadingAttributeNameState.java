@@ -17,7 +17,7 @@ public class ReadingAttributeNameState extends DTDAttlistState
     @Override
     public DTDState consumeCharacter(char c)
     {
-        if (c == ' ')
+        if ((c == ' ') || ( c == '\t'))
         {
             return new WaitingForAttributeTypeState(this, c);
         }

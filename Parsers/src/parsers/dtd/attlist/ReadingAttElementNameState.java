@@ -19,7 +19,7 @@ public class ReadingAttElementNameState extends DTDAttlistState
     @Override
     public DTDState consumeCharacter(char c)
     {
-        if (c == ' ')
+        if ((c == ' ') || ( c == '\t'))
         {
             return new WaitingForAttNameState(this, c);
         }

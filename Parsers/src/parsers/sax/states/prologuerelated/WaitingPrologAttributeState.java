@@ -37,7 +37,7 @@ public class WaitingPrologAttributeState extends SAXParserState
     public SAXParserState consumeCharacter(char c, Stack<String> stack, boolean escaped) throws SAXParserException
     {
         // Si todavia no llega el nombre o el fin de etiqueta
-        if (c == ' ')
+        if ((c == ' ') || ( c == '\t'))
         {
             return this;
         }

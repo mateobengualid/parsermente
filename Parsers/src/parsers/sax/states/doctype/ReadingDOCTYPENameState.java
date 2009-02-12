@@ -28,7 +28,7 @@ public class ReadingDOCTYPENameState extends SAXParserState
     public SAXParserState consumeCharacter(char c, Stack<String> stack, boolean escaped) throws SAXParserException
     {
         // Stop reading and begin a quest to the real dtd location.
-        if (c == ' ')
+        if ((c == ' ') || ( c == '\t'))
         {
             return new DOCTYPEWaitingBracketOrSystemState(doctypeName, handler);
         }

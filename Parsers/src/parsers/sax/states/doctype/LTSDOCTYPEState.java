@@ -25,7 +25,7 @@ public class LTSDOCTYPEState extends SAXParserState
     public SAXParserState consumeCharacter(char c, Stack<String> stack, boolean escaped) throws SAXParserException
     {
         // Is a <!DOCTYPE, wait for blank spaces or enters.
-        if (c == ' ')
+        if ((c == ' ') || ( c == '\t'))
         {
             return new DOCTYPEWaitingNameState(handler);
         }

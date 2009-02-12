@@ -38,7 +38,7 @@ public class PrologNameState extends SAXParserState
         else
         {
             // Si se termino el nombre, comenzar el procesamiento de los atributos            
-            if (c == ' ')
+            if ((c == ' ') || ( c == '\t'))
             {
                 if (name.equalsIgnoreCase("xml"))
                 {

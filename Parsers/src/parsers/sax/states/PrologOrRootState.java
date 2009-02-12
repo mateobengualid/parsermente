@@ -27,7 +27,7 @@ public class PrologOrRootState extends SAXParserState
     @Override
     public SAXParserState consumeCharacter(char c, Stack<String> stack, boolean escaped) throws SAXParserException
     {
-        if (c == ' ')
+        if ((c == ' ') || ( c == '\t'))
         {
             return this;
         }

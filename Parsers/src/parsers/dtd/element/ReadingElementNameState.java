@@ -19,7 +19,7 @@ public class ReadingElementNameState extends DTDState
     @Override
     public DTDState consumeCharacter(char c)
     {
-        if (c == ' ')
+        if ((c == ' ') || ( c == '\t'))
         {
             return new WaitingForCategoryOrContentState(this, c);
         }
