@@ -36,7 +36,7 @@ public class ElementNameState extends SAXParserState
         else
         {
             // Si se termino el nombre, comenzar el procesamiento de los atributos            
-            if ((c == ' ') || ( c == '\t'))
+            if ((c == ' ') || ( c == '\t') || ( c == '\n') || ( c == '\r'))
             {
                 return new WaitingAttributeState(name, handler);
             }
