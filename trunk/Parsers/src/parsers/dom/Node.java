@@ -71,12 +71,6 @@ public class Node
 	this.children = hijos;
     }
     
-    @Override
-    public String toString()
-    {
-        return this.name;
-    }
-
     public Node getFather() {
         return father;
     }
